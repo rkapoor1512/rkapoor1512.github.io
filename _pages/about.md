@@ -1,13 +1,12 @@
 ---
 permalink: /
-title: "Rohan kapoor"
+title: "Rohan Kapoor"
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
 ---
-
-Hi, this website is currently being built. 
+This website is under construction. 
 
 I'm a mathematics PhD student at Dartmouth College starting in Fall 2024. I graduated from the University of Chicago with a BA in Mathematics in 2023, and spent a year as an Exponent Fellow at the National Museum of Mathematics. I also have experience in quantitative trading and molecular engineering research. My academic interests are in geometric measure theory, functional analysis, and AI alignment research. 
 
