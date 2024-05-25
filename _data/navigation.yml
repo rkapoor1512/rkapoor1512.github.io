@@ -1,15 +1,11 @@
 # main links links
 main:
-
-- title: "Home"
-    url: /
-		
-- title: "Teaching"
+ - title: "Home"
+    url: /	
+ - title: "Teaching"
    url: /_teaching/teaching  
-
-- title: "CV"
-    url: /assets/Resume_May_2024.pdf
-    
+ - title: "CV"
+    url: /assets/Resume_May_2024.pdf 
 #  - title: "Portfolio"
 #   url: /portfolio/
         
