@@ -1,14 +1,14 @@
 # main links links
 main:
 
-  - title: "Home"
+	- title: "Home"
     url: /
+		
+	- title: "Teaching"
+   url: /_teaching/teaching  
 
-#  - title: "Talks"
-#    url: /talks/    
-
-  - title: "Teaching"
-   url: /_teaching/teaching    
+	- title: "CV"
+    url: /assets/Resume_May_2024.pdf
     
 #  - title: "Portfolio"
 #   url: /portfolio/
@@ -16,8 +16,10 @@ main:
  # - title: "Blog Posts"
  #   url: /year-archive/
     
-  - title: "CV"
-    url: /assets/Resume_May_2024.pdf
+
     
  # - title: "Guide"
  #   url: /markdown/
+
+ #  - title: "Talks"
+#    url: /talks/    
