@@ -1,11 +1,13 @@
 # main links links
 main:
- - title: "Home"
-    url: /	
- - title: "Teaching"
-   url: /_teaching/teaching  
- - title: "CV"
-    url: /assets/Resume_May_2024.pdf 
+   - title: "Home"
+     url: /
+   - title: "Teaching"
+     url: /_teaching/teaching
+   - title: "CV"
+     url: /assets/Resume_May_2024.pdf 
+#this code is highly sensitive to indentation bullshit      
+
 #  - title: "Portfolio"
 #   url: /portfolio/
         
