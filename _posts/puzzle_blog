@@ -1,0 +1,17 @@
+---
+title: 'List of Puzzles I have enjoyed at various times in life'
+date: 2024-06-20
+permalink: /posts/puzzle_blog/
+tags:
+  - cool posts
+  - category1
+  - category2
+---
+
+## Puzzle 1
+What has keys but can't open locks?
+
+<button onclick="document.getElementById('answer1').style.display='block'">Show Answer</button>
+<div id="answer1" style="display:none;">
+A piano.
+</div>
