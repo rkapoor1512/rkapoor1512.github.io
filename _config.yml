@@ -21,10 +21,10 @@ repository               : "rkapoor1512/rkapoor1512.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "file(1).png"
   name             : "Rohan Kapoor"
   pronouns         : "he/him"  
-  bio              : "Mathematics PhD at Dartmouth bro"
+  bio              : "Mathematics PhD at Dartmouth test"
   location         : # "India"
   employer         : # "Red Brick University"
   uri              : # URL
