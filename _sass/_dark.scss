@@ -1,54 +1,312 @@
 /* ==========================================================================
    DARK THEME
+   --------------------------------------------------------------------------
+   Activated by setting `data-theme="dark"` on <html>. The inline script in
+   `_includes/head/theme-init.html` sets this before paint to avoid FOUC.
    ========================================================================== */
 
-/* Color codes used for the theme */
-$gray                       : #7a8288;
-$dark-gray                  : mix(#000, $gray, 40%);
-$darker-gray                : mix(#000, $gray, 60%);
-$light-gray                 : mix(#fff, $gray, 50%);
+/* Dark-theme palette (scoped to this file) */
+$dark-bg            : #1a1a1a;
+$dark-bg-elevated   : #242424;
+$dark-bg-code       : #2a2a2a;
+$dark-border        : #3a3a3a;
+$dark-text          : #e6e6e6;
+$dark-text-muted    : #a0a0a0;
+$dark-link          : #6cb6ff;
+$dark-link-hover    : #9ccdff;
 
-$background                 : #474747;
-$background-light           : mix(#fff, $background, 80%);
-$background-lighter         : mix(#fff, $background, 90%);
-$text                       : #ffffff;
-$link                       : #0ea1c5;
-$link-dark                  : mix(#000, $link, 25%);
-$link-light                 : mix(#fff, $link, 25%);
-
-/* Color codes used for the site */
-$danger-color               : #ee5f5b;
-$info-color                 : #2f7f93;
-$notice-color               : #7a8288;
-$success-color              : #62c462;
-$warning-color              : #f89406;
-
-/* Other basic settings for the template */
-$border-radius              : 4px;
-$box-shadow                 : 0 1px 1px rgba(0, 0, 0, 0.125);
-$global-transition          : all 0.2s ease-in-out;
-$masthead-height            : 70px;
-$navicon-width              : 28px;
-$navicon-height             : 4px;
-$sidebar-link-max-width     : 250px;
-$sidebar-screen-min-width   : 1024px;
-
-/* Dark theme for the site */
 html[data-theme="dark"] {
-    --global-base-color                 : #{$background};
-    --global-bg-color                   : #{$background};
-    --global-footer-bg-color            : #{$background};
-    --global-border-color               : #{$light-gray};
-    --global-dark-border-color          : #{$background-light};
-    --global-code-background-color      : #fafafa;
-    --global-code-text-color            : #{$darker-gray};
-    --global-fig-caption-color          : #{$light-gray};
-    --global-link-color                 : #{$link};
-    --global-link-color-hover           : #{$link-dark};
-    --global-link-color-visited         : #{$link-light};
-    --global-masthead-link-color        : #{$text};
-    --global-masthead-link-color-hover  : #{$background-light};
-    --global-text-color                 : #{$text};
-    --global-text-color-light           : #{$light-gray};
-    --global-thead-color                : #{$background-lighter};
+  background-color: $dark-bg;
+
+  body {
+    background-color: $dark-bg;
+    color: $dark-text;
+  }
+
+  /* Headings, paragraphs, lists inherit `color` from body */
+  h1, h2, h3, h4, h5, h6 {
+    color: $dark-text;
+  }
+
+  /* Links */
+  a {
+    color: $dark-link;
+
+    &:hover, &:focus {
+      color: $dark-link-hover;
+    }
+  }
+
+  /* Masthead (top nav bar) */
+  .masthead {
+    background: $dark-bg-elevated;
+    border-bottom-color: $dark-border;
+
+    .greedy-nav {
+      background: $dark-bg-elevated;
+
+      a {
+        color: $dark-text;
+
+        &:hover {
+          color: $dark-link-hover;
+        }
+      }
+
+      button {
+        background: $dark-bg-elevated;
+      }
+
+      .hidden-links {
+        background: $dark-bg-elevated;
+
+        a {
+          color: $dark-text;
+
+          &:hover {
+            color: $dark-link-hover;
+            background: $dark-bg-code;
+          }
+        }
+      }
+    }
+  }
+
+  /* Sidebar / author profile */
+  .sidebar {
+    color: $dark-text;
+
+    h3, h4, .author__name {
+      color: $dark-text;
+    }
+
+    .author__bio, .author__pronouns, p, li {
+      color: $dark-text-muted;
+    }
+
+    .author__avatar img {
+      border-color: $dark-border;
+    }
+
+    .author__urls {
+      background: $dark-bg-elevated;
+      border-color: $dark-border;
+
+      &:after {
+        border-color: $dark-bg-elevated transparent;
+      }
+
+      a {
+        color: $dark-text;
+
+        &:hover {
+          color: $dark-link-hover;
+        }
+      }
+    }
+  }
+
+  /* Footer */
+  .page__footer {
+    background-color: $dark-bg-elevated;
+    border-top-color: $dark-border;
+    color: $dark-text-muted;
+
+    a {
+      color: $dark-text-muted;
+
+      &:hover {
+        color: $dark-link-hover;
+      }
+    }
+
+    .fas, .fab, .far, .fal {
+      color: $dark-text-muted;
+    }
+  }
+
+  /* Inline code */
+  p > code,
+  a > code,
+  li > code,
+  figcaption > code,
+  td > code {
+    background: $dark-bg-code;
+    color: $dark-text;
+    border-color: $dark-border;
+  }
+
+  /* Code blocks (rouge syntax highlighter) */
+  pre, .highlight, .highlighter-rouge {
+    background-color: $dark-bg-code;
+    color: $dark-text;
+  }
+
+  pre code {
+    color: $dark-text;
+  }
+
+  /* Blockquotes */
+  blockquote {
+    border-left-color: $dark-text-muted;
+    color: $dark-text-muted;
+  }
+
+  /* Tables */
+  table {
+    color: $dark-text;
+    border-color: $dark-border;
+  }
+
+  thead {
+    background-color: $dark-bg-elevated;
+    border-bottom-color: $dark-border;
+  }
+
+  th, td {
+    border-color: $dark-border;
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: $dark-bg-elevated;
+  }
+
+  /* Horizontal rules */
+  hr {
+    border-top-color: $dark-border;
+  }
+
+  /* Form inputs */
+  input, textarea, select {
+    background-color: $dark-bg-elevated;
+    color: $dark-text;
+    border-color: $dark-border;
+  }
+
+  /* Archive items (post lists) */
+  .archive__item-title a {
+    color: $dark-text;
+
+    &:hover {
+      color: $dark-link-hover;
+    }
+  }
+
+  .archive__item-excerpt {
+    color: $dark-text-muted;
+  }
+
+  .page__meta, .page__date, .page__taxonomy {
+    color: $dark-text-muted;
+  }
+
+  /* Page title underline / breadcrumbs */
+  .page__title {
+    color: $dark-text;
+  }
+
+  /* Notices (callouts) — keep their accent colors readable */
+  .notice, .notice--primary, .notice--info,
+  .notice--warning, .notice--success, .notice--danger {
+    background-color: $dark-bg-elevated;
+    color: $dark-text;
+  }
+
+  /* Buttons */
+  .btn--inverse {
+    background-color: $dark-bg-elevated;
+    color: $dark-text;
+    border-color: $dark-border;
+
+    &:hover {
+      background-color: $dark-bg-code;
+      color: $dark-link-hover;
+    }
+  }
+
+  /* Pagination */
+  .pagination li a {
+    color: $dark-text;
+    border-color: $dark-border;
+    background-color: $dark-bg-elevated;
+
+    &:hover {
+      color: $dark-link-hover;
+    }
+
+    &.current {
+      background: $dark-link;
+      color: $dark-bg;
+    }
+  }
+
+  /* MathJax — let it inherit text color */
+  mjx-container {
+    color: $dark-text;
+  }
+}
+
+/* ==========================================================================
+   THEME TOGGLE BUTTON
+   --------------------------------------------------------------------------
+   Sits at the right edge of the masthead. The greedy-nav hamburger button
+   (visible only on narrow viewports) is shifted left to make room.
+   Selectors are scoped under .greedy-nav so they win against the generic
+   `.greedy-nav button` rule in _navigation.scss.
+   ========================================================================== */
+
+/* Shift the hamburger button left so the theme toggle can sit at right: 0.
+   The hamburger is the unclassed <button> in greedy-nav; exclude .theme-toggle. */
+.greedy-nav > button:not(.theme-toggle) {
+  right: 3rem;
+}
+
+.greedy-nav .theme-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: inherit;
+  z-index: 100;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 0, 0, 0.12);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #6cb6ff;
+    outline-offset: 2px;
+  }
+
+  .theme-toggle__icon {
+    pointer-events: none;
+  }
+
+  /* Light mode: show moon (clicking switches to dark). */
+  .theme-toggle__icon--sun  { display: none; }
+  .theme-toggle__icon--moon { display: inline; }
+}
+
+html[data-theme="dark"] .greedy-nav .theme-toggle {
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .theme-toggle__icon--sun  { display: inline; }
+  .theme-toggle__icon--moon { display: none; }
 }

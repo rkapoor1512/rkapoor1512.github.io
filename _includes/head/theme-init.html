@@ -1,0 +1,25 @@
+{% comment %}
+  Set data-theme on <html> before paint so the page renders in the right
+  theme on first frame (no flash). Order of preference:
+    1. Saved choice in localStorage (set by the toggle button).
+    2. OS-level prefers-color-scheme.
+    3. Light.
+{% endcomment %}
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      var theme;
+      if (stored === 'dark' || stored === 'light') {
+        theme = stored;
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        theme = 'dark';
+      } else {
+        theme = 'light';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>
