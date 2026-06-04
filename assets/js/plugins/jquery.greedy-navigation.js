@@ -6,7 +6,9 @@
 */
 
 var $nav = $('#site-nav');
-var $btn = $('#site-nav button');
+// Hamburger toggle only — exclude .theme-toggle so the dark-mode button
+// is not auto-hidden or wired to the overflow-dropdown click handler.
+var $btn = $('#site-nav > button:not(.theme-toggle)');
 var $vlinks = $('#site-nav .visible-links');
 var $hlinks = $('#site-nav .hidden-links');
 

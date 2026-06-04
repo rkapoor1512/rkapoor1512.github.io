@@ -261,6 +261,12 @@ html[data-theme="dark"] {
   right: 3rem;
 }
 
+/* Reserve space on the right of the visible nav links so the absolutely
+   positioned theme toggle doesn't overlap the last link (e.g. "Blog"). */
+.greedy-nav .visible-links {
+  padding-right: 3rem;
+}
+
 .greedy-nav .theme-toggle {
   position: absolute;
   top: 50%;
