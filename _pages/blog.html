@@ -1,16 +1,17 @@
- ---
-   2 layout: archive
-   3 title: "Blog"
-   4 permalink: /blog/
-   5 author_profile: true
-   6 ---
-   7
-   8 <p>
-   9   A collection of study notes, expository write-ups, and occasional longer-form
-  10   posts — mostly on the mathematics I am thinking about. Most of my non-mathematical blogging is on Substack. 
-     If you find any errors, please email me and I will be happy to fix them. 
-  14 </p>
-  15
-  16 {% for post in site.posts %}
-  17   {% include archive-single.html %}
-  18 {% endfor %}
+---
+layout: archive
+title: "Blog"
+permalink: /blog/
+author_profile: true
+---
+
+<p>
+  A collection of study notes, expository write-ups, and occasional longer-form
+  posts — mostly on the mathematics I am thinking about. Most of my
+  non-mathematical blogging is on Substack. If you find any errors, please email
+  me and I will be happy to fix them.
+</p>
+
+{% for post in site.posts %}
+  {% include archive-single.html %}
+{% endfor %}
