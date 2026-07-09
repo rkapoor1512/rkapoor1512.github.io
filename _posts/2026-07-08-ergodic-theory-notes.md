@@ -62,11 +62,11 @@ Let's work out some examples.
 
     which shows that this is an invariant measure. This example has deep connections to the math of continued fractions and number theory. $\blacksquare$
 
-![Orbits of the circle rotation $z \mapsto \alpha z$ on $S^1$. When $\alpha$ is rational every orbit closes up; when $\alpha$ is irrational, orbits are dense .](/images/ergodic/fig_circle_rotation.png)
+![Orbits of the circle rotation $z \mapsto \alpha z$ on $S^1$. When $\alpha$ is rational every orbit closes up; when $\alpha$ is irrational, orbits are dense .](/images/fig_circle_rotation.png)
 
-![The doubling map on $[0,1]$. Left: the graph of $T(x) = 2x \bmod 1$ with a trajectory. Right: on binary expansions, $T$ acts as the left shift.](/images/ergodic/fig_doubling_map.png)
+![The doubling map on $[0,1]$. Left: the graph of $T(x) = 2x \bmod 1$ with a trajectory. Right: on binary expansions, $T$ acts as the left shift.](/images/fig_doubling_map.png)
 
-![The Gauss map $T(x) = 1/x - \lfloor 1/x \rfloor$ with its invariant density $\frac{1}{(1+x)\log 2}$ overlaid.](/images/ergodic/fig_gauss_map.png)
+![The Gauss map $T(x) = 1/x - \lfloor 1/x \rfloor$ with its invariant density $\frac{1}{(1+x)\log 2}$ overlaid.](/images/fig_gauss_map.png)
 
 I'd like to do one other example separately: the construction here ends up being quite useful to understand the connections between dynamical systems and probability theory, especially that of Markov chains.
 
@@ -281,7 +281,7 @@ If $A \in \mathrm{GL}_n(\mathbb{Z})$, then it induces a map $\mathscr{T}_A : \ma
 
 If a toral endomorphism has no eigenvalues of modulus $1$, we say it is a **hyperbolic endomorphism**. People like studying these.
 
-![Arnold's cat map, a hyperbolic toral automorphism given by $A = \begin{pmatrix}2 & 1 \\\\ 1 & 1\end{pmatrix}$ acting on $\mathbb{T}^2$. Even a few iterates smear the original image across the whole torus.](/images/ergodic/fig_cat_map.png)
+![Arnold's cat map, a hyperbolic toral automorphism given by $A = \begin{pmatrix}2 & 1 \\\\ 1 & 1\end{pmatrix}$ acting on $\mathbb{T}^2$. Even a few iterates smear the original image across the whole torus.](/images/fig_cat_map.png)
 
 The next theorem proves some basic spectral properties of the Koopman operator, which end up being quite useful.
 
@@ -637,7 +637,7 @@ The proof uses techniques from $C^*$-algebras and an application of the Markov--
 
 **Theorem 6.3 (Benford's Law).** Benford's law is the observation that the distribution of first digits of numbers found in data, especially financial data, empirically follows the distribution shown in the figure below, with digit $d \in \\{1, \ldots, 9\\}$ occurring with probability $\log_{10}(1 + 1/d)$.
 
-![The Benford distribution over leading digits: $P(d) = \log_{10}(1 + 1/d)$.](/images/ergodic/fig_benford.png)
+![The Benford distribution over leading digits: $P(d) = \log_{10}(1 + 1/d)$.](/images/fig_benford.png)
 
 While this observation is largely empirical, it is mostly observed in datasets that contain numbers of various orders of magnitude: electricity bills, street addresses, stock prices, house prices, population numbers, death rates, lengths of rivers, and physical and mathematical constants. It is even used in financial fraud detection. While there is no complete theoretical explanation, a fairly robust one was given by Gelfand via ergodic theory.
 
@@ -645,7 +645,7 @@ While this observation is largely empirical, it is mostly observed in datasets t
 
 **Example 6.4.** The **Gilbert--Shannon--Reeds model** of card shuffling uses ergodic theory to analyze riffle shuffles.
 
-![One step of the Gilbert--Shannon--Reeds riffle shuffle: cut the deck at a $\mathrm{Binomial}(n, 1/2)$ position, then drop cards from the left or right half with probability proportional to the current size of each half.](/images/ergodic/fig_riffle.png)
+![One step of the Gilbert--Shannon--Reeds riffle shuffle: cut the deck at a $\mathrm{Binomial}(n, 1/2)$ position, then drop cards from the left or right half with probability proportional to the current size of each half.](/images/fig_riffle.png)
 
 ### 6.3 Number Theory
 
