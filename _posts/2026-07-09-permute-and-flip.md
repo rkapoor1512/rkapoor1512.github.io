@@ -1,15 +1,15 @@
 ---
-title: 'The Permute-and-Flip Mechanism'
+title: 'Differentially Private Selection'
 date: 2026-07-09
 permalink: /posts/2026/07/permute-and-flip/
-excerpt: "A study of the permute-and-flip mechanism for differentially private selection: its definition, its optimality among regular mechanisms, and its equivalence with Report Noisy Max under exponential noise."
+excerpt: "A study of the permute-and-flip mechanism for differentially private selection."
 tags:
   - differential-privacy
   - algorithms
   - mechanism-design
 ---
 
-*These are a set of study notes on the permute-and-flip mechanism for differentially private selection. They cover the mechanism as introduced by McKenna and Sheldon [1], a proof that it is optimal among a natural class of "regular" mechanisms, and the equivalence with Report Noisy Max under exponential noise, following Ding, Durfee, Kifer, Rogers, and Zhang [2].*
+In Winter 2026, I took an excellent class on differential privacy taught by Dr. Phyllis Ju. As a part of that course, I presented on two papers. The first was on the permute-and-flip mechanism for differentially private selection, as introduced by McKenna and Sheldon [1]. The second was on this methods' equivalence with Report Noisy Max under exponential noise, following Ding, Durfee, Kifer, Rogers, and Zhang [2]. I hope to, at some later point, add a preamble that provides a gentler introduction to differential privacy in general. As of now, these notes assume a bit of background knowledge in the field of differential privacy, and the standard terminology in the field. 
 
 Given a database $D$ and a finite set of candidate outputs, each of which comes with a quality score, we would like to release the "best" output — the one with the highest score — while preserving the privacy of individuals in $D$. This is the **differentially private selection** problem. The classical solution is the **exponential mechanism**, which samples output $r$ with probability proportional to $\exp(\varepsilon\, q(D, r) / (2\Delta))$. The permute-and-flip mechanism, introduced in 2020, does at least as well as the exponential mechanism on every input, and strictly better on most.
 
