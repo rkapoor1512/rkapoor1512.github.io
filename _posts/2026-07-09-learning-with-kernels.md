@@ -2,15 +2,14 @@
 title: 'Learning with Kernels'
 date: 2026-07-09
 permalink: /posts/2026/07/learning-with-kernels/
-excerpt: "A set of study notes on the mathematics of kernels: reproducing kernel Hilbert spaces, kernelized learning algorithms, and their connection to kernel integral operators."
+excerpt: "A set of study notes on the mathematics of kernel machines: reproducing kernel Hilbert spaces, kernelized learning algorithms, and their connection to kernel integral operators."
 tags:
   - kernel-methods
   - machine-learning
-  - rkhs
   - functional-analysis
 ---
 
-*These are a set of study notes on the mathematics of kernels. They are largely based on Schölkopf and Smola's **Learning with Kernels** [1]. They study the theory of reproducing kernel Hilbert spaces, and kernelized algorithms for machine learning, and connect these to kernel integral operators and their regularization properties.*
+*These are a set of study notes on the mathematics of kernels. They are largely based on Schölkopf and Smola's **Learning with Kernels**. They study the theory of reproducing kernel Hilbert spaces, and kernelized algorithms for machine learning, and connect these to kernel integral operators and their regularization properties.*
 
 ## 1. Support Vector Machines
 
