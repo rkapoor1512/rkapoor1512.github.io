@@ -579,7 +579,7 @@ $$
 \end{aligned}
 $$
 
-where we used the dominated convergence theorem in the last line to exchange the limit and the integral. *(Concluding step to be completed.)* $\blacksquare$
+where we used the dominated convergence theorem in the last line to exchange the limit and the integral. $\blacksquare$
 
 <!-- TODO: ## 5. The Isomorphism Problem
 
