@@ -403,7 +403,7 @@ Lastly, we present a rather famous application of this to number theory.
 
 *Proof.* As noted earlier, almost all numbers have a unique binary representation. Then, consider $f = \chi_{[1/2, 1)}(x)$, the characteristic function of the interval $[1/2, 1)$. Then, $f(T^i(x))$ is $1$ if the $(i+1)$-th digit in its binary expansion is $1$, and $0$ otherwise. Thus, we see that $\frac{1}{N}\sum_{n=0}^{N-1} f(T^n(x))$ is the proportion of $1$s in the binary expansion in the first $N$ digits. By the pointwise ergodic theorem, we know that this converges in large $N$ to $\int f\, d\mu = \mu([1/2, 1)) = \frac{1}{2}$. This proves the given result. $\blacksquare$
 
-![Borel's normal-number theorem in action: for a typical $x \in [0,1)$, the running proportion of $1$s in the binary expansion tends to $1/2$.](/images/ergodic/fig_borel_normal.png)
+![Borel's normal-number theorem in action: for a typical $x \in [0,1)$, the running proportion of $1$s in the binary expansion tends to $1/2$.](/images/fig_borel_normal.png)
 
 Since the countable union of measure-zero sets is measure zero, this can easily be extended to proving that almost all numbers are absolutely normal, i.e., normal in every base.
 
