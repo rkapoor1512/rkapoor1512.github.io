@@ -259,7 +259,9 @@ $$
 f^*(x) = \sum_{i=1}^n a_i\, K(x_i, x).
 $$
 
-*Proof.* Let $H_n = \text{span}\\{K(x_i, \cdot)\\}_{i=1}^n$. Since this is finite-dimensional it is closed, so the projection onto it and its orthogonal complement are well-defined. Write $f = f_\parallel + f_\perp$ with $f_\parallel \in H_n$ and $f_\perp \perp H_n$. Then
+*Proof* Let $H_n = \text{span}\\{K(x_i, \cdot)\\}_{i=1}^n$. Since this is finite-dimensional it is closed, so the projection onto it and its orthogonal complement are well-defined. 
+
+Write $f = f_\parallel + f_\perp$ with $f_\parallel \in H_n$ and $f_\perp \perp H_n$. Then
 
 $$
 f(x_j) = \langle f, K(x_j, \cdot)\rangle = \langle f_\parallel, K(x_j, \cdot)\rangle = f_\parallel(x_j),
