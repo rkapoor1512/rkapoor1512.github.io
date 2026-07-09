@@ -8,7 +8,9 @@ tags:
   - koopman-operator
 ---
 
-*These are a set of study notes on ergodic theory, with a special view toward studying dynamical systems via their Koopman operator. They are largely structured around two textbooks: **Operator-Theoretic Aspects of Ergodic Theory** [1] and **An Introduction to Ergodic Theory** [2], as well as lectures given by Dimitris Giannakis at Dartmouth College in Spring 2025. They were written for the Mathematics Directed Reading Program (DRP) at Dartmouth in the Winter of 2025.*
+*These are a set of study notes on ergodic theory, with a special view toward studying dynamical systems via their Koopman operator.*
+
+They are largely structured around two textbooks: **Operator-Theoretic Aspects of Ergodic Theory** [1] and **An Introduction to Ergodic Theory** [2], as well as lectures given by Dimitris Giannakis at Dartmouth College in Spring 2025. They were written for the Mathematics Directed Reading Program (DRP) at Dartmouth in the Winter of 2025.
 
 The general construction of a dynamical system is that there is some phase space $X$, with a dynamical map $T: X \to X$, and we study the properties of this map, and trajectories under it. There are two typical settings for this: we can either assume $X$ is a topological space, and the dynamics are continuous, or that $X$ is a measure space, and the dynamics are measurable. There is a deep and rich interplay between these two settings, but for now we will set everything up in the latter formalism.
 
@@ -578,7 +580,9 @@ $$
 
 where we used the dominated convergence theorem in the last line to exchange the limit and the integral. *(Concluding step to be completed.)* $\blacksquare$
 
-## 5. The Isomorphism Problem
+<!-- TODO: ## 5. The Isomorphism Problem
+
+
 
 First, we present a few different notions of equivalence of two measure-preserving dynamical systems. In this section, we will be fairly explicit about the $\sigma$-algebras associated to each measure.
 
@@ -619,6 +623,8 @@ The elements of the point spectrum are known as eigenvalues, and their associate
 
 For unitary operators, the residual spectrum is empty.
 
+ -->
+
 ## 6. Advanced Results and Applications
 
 ### 6.1 Continuous-time Dynamical Systems
@@ -629,9 +635,10 @@ These notes are largely dedicated to studying discrete-time dynamical systems. I
 
 Note that in the case that $X$ is a measure space and $G$ is $\mathbb{N}$, we recover the case of discrete-time measurable dynamical systems. We can also use $G = \mathbb{R}$ to analyze the case of continuous-time dynamics. This perspective is quite flexible, and choosing $G$ to be a group other than $\mathbb{N}$, $\mathbb{Z}$, or $\mathbb{R}$ can often result in very interesting mathematics that I do not understand very well.
 
+<!-- TODO
 **Theorem 6.2.** All compact topological dynamical systems have an ergodic, invariant Borel probability measure.
 
-The proof uses techniques from $C^*$-algebras and an application of the Markov--Kakutani fixed-point theorem.
+The proof uses techniques from $C^*$-algebras and an application of the Markov--Kakutani fixed-point theorem. -->
 
 ### 6.2 Fun Applications
 
@@ -665,9 +672,11 @@ The ergodic-theoretic proof is given by effectively proving the Poincaré recurr
 
 Even though the prime numbers have $0$ upper density by the Prime Number Theorem, Green--Tao were able to extend these methods to show that the prime numbers contain arbitrarily long arithmetic progressions.
 
+<!-- TODO
+
 **Theorem 6.7.** Almost all invertible measure-preserving transformations are weak-mixing. More formally, for a given probability space $(X, \mathcal{X}, \mu)$, we can form the space $\mathrm{Aut}(X, \mu)$ of all measure-preserving transformations, and give it a weak topology. In this topology, the weak-mixing transformations form a dense $G_\delta$ set (a residual set).
 
-The end of the last section also motivates a natural next area of study. Since spectral invariants are too weak to distinguish different systems with continuous spectrum from each other, we must find a stronger notion of invariance. Kolmogorov and Sinai did this by creating the notion of **entropy** of a dynamical system, which has become an active area of research. Entropy can be defined in both the topological and the measure-theoretic setting, and discussing it is beyond the scope of these notes. The motivated reader is referred to [2].
+The end of the last section also motivates a natural next area of study. Since spectral invariants are too weak to distinguish different systems with continuous spectrum from each other, we must find a stronger notion of invariance. Kolmogorov and Sinai did this by creating the notion of **entropy** of a dynamical system, which has become an active area of research. Entropy can be defined in both the topological and the measure-theoretic setting, and discussing it is beyond the scope of these notes. The motivated reader is referred to [2]. -->
 
 ## References
 
