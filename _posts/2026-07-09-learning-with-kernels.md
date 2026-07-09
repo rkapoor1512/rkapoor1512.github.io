@@ -273,6 +273,8 @@ $$
 
 But $\|f\|_H^2 = \|f_\parallel\|_H^2 + \|f_\perp\|_H^2 \geq \|f_\parallel\|_H^2$. Thus the first term of the risk depends only on $f_\parallel$, while the regularization term is only increased by a nonzero $f_\perp$. Hence $\|f_\perp\| = 0$ for the optimal $f$, which means $f \in \text{span}\\{K(x_i, \cdot)\\}_i$. $\square$
 
+<!-- TODO 
+
 ## 7. Regularization Operators
 
 Here we present a third perspective on kernel methods: viewing them as a regularization operator in some space. This ultimately connects, via Bochner's theorem, to a picture of translation-invariant kernels as regularizers in the frequency domain.
@@ -288,7 +290,7 @@ Finally, we restrict to **translation-invariant** kernels.
 Such kernels admit an abstract characterization via **Bochner's theorem**, which in turn gives a way to write randomized kernel algorithms (random Fourier features).
 
 ---
-
+-->
 *These notes are a work in progress. The proof of Mercer's theorem, the kernel mean embedding, and the random Fourier features / Bochner's theorem material are still being written and will be added.*
 
 ## References
