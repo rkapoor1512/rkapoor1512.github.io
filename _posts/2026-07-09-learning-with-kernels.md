@@ -273,7 +273,13 @@ $$
 \sum_i L(x_i, y_i, f(x_i)) = \sum_i L(x_i, y_i, f_\parallel(x_i)).
 $$
 
-But $\|f\|_H^2 = \|f_\parallel\|_H^2 + \|f_\perp\|_H^2 \geq \|f_\parallel\|_H^2$. Thus the first term of the risk depends only on $f_\parallel$, while the regularization term is only increased by a nonzero $f_\perp$. Hence $\|f_\perp\| = 0$ for the optimal $f$, which means $f \in \text{span}\\{K(x_i, \cdot)\\}_i$. $\square$
+But 
+
+$$
+\|f\|_H^2 = \|f_\parallel\|_H^2 + \|f_\perp\|_H^2 \geq \|f_\parallel\|_H^2
+$$
+
+Thus the first term of the risk depends only on $f_\parallel$, while the regularization term is only increased by a nonzero $f_\perp$. Hence $\|f_\perp\| = 0$ for the optimal $f$, which means $f \in \text{span}\\{K(x_i, \cdot)\\}_i$. $\square$
 
 <!-- TODO 
 
