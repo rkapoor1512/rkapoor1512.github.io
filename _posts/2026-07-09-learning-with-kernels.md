@@ -185,7 +185,7 @@ There are a number of common loss functions. The first three are used for **clas
 - **Binary (0–1) loss.** This simply counts misclassifications:
 
 $$
-c(x,y,f(x)) = \mathbf{1}[\,y f(x) < 0\,] = \tfrac{1}{2}\,\lvert\,\operatorname{sgn} f(x) - y\,\rvert.
+c(x,y,f(x)) = \mathbf{1}[\,y f(x) < 0\,] = \tfrac{1}{2}\,\lvert\,\text{sgn} f(x) - y\,\rvert.
 $$
 
   It is the loss we truly care about, but it is non-convex and discontinuous, so in practice we minimize a convex **surrogate** that upper-bounds it. The next two are the most common such surrogates.
