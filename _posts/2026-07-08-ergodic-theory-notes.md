@@ -643,13 +643,13 @@ The proof uses techniques from $C^*$-algebras and an application of the Markov--
 
 ### 6.2 Fun Applications
 
-**Theorem 6.3 (Benford's Law).** Benford's law is the observation that the distribution of first digits of numbers found in data, especially financial data, empirically follows the distribution shown in the figure below, with digit $d \in \\{1, \ldots, 9\\}$ occurring with probability $\log_{10}(1 + 1/d)$.
+**Theorem 6.3 (Benford's Law).** Benford's law is the observation that the distribution of first digits of numbers found in data, especially financial data, empirically follows the distribution shown in the figure below.
 
 ![The Benford distribution over leading digits: $P(d) = \log_{10}(1 + 1/d)$.](/images/fig_benford.png)
 
 While this observation is largely empirical, it is mostly observed in datasets that contain numbers of various orders of magnitude: electricity bills, street addresses, stock prices, house prices, population numbers, death rates, lengths of rivers, and physical and mathematical constants. It is even used in financial fraud detection. While there is no complete theoretical explanation, a fairly robust one was given by Gelfand via ergodic theory.
 
-*(The model explaining Benford's law is left to be filled in.)*
+The model of explaining Benford's law assumes that a large amount of data in the real world arises due to a system of the form $a^r$, for some real number $r$. For example, this is a great model of prices under an inflation rate of $r$. Then, the first digit of the number $a^r$ is determined entirely by the value of the fractional part of $\log_{10}(a^r)$. If this fractional part lies in $[0, \log_{10}(2))$, the first digit is 1. If it is in $[\log_{10}(2), \log_{10}(3))$, the first digit is 2, and so on. However, note that the 'dynamical system' here is exactly that of $x \mapsto r \alpha \text{ mod 1}$, where $\alpha = \log_{10}a$, which is an irrational number. Thus, we see that by the Birkhoff ergodic theorem, the time spent in each interval is proportional to the measure of the interval, which is simply its length. We can compute these lengths, and they match up perfectly with Benford's law's predictions: the frequency of digit $d \in \\{1, \ldots, 9\\}$ is precisely $\log_{10}(1 + 1/d)$.
 
 **Example 6.4.** The **Gilbert--Shannon--Reeds model** of card shuffling uses ergodic theory to analyze riffle shuffles.
 
