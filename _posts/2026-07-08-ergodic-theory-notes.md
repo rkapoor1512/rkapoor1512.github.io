@@ -636,6 +636,18 @@ These notes are largely dedicated to studying discrete-time dynamical systems. I
 
 Note that in the case that $X$ is a measure space and $G$ is $\mathbb{N}$, we recover the case of discrete-time measurable dynamical systems. We can also use $G = \mathbb{R}$ to analyze the case of continuous-time dynamics. This perspective is quite flexible, and choosing $G$ to be a group other than $\mathbb{N}$, $\mathbb{Z}$, or $\mathbb{R}$ can often result in very interesting mathematics that I do not understand very well.
 
+This formalism also lends itself to define random dynamical systems quite easily. In a random dynamical system, the dynamical map at each timestep is not a deterministic map, but rather randomly chosen according to some distribution. The trick here, then, is to expand our state space to include the randomness, and view it as a deterministic dynamical system on this space. Formally, let $\Omega= (\Omega, \mathcal{F}, P)$ be a probability space, known as the noise space, and let $X= (X, \Sigma, \mu)$ be our standard state space. On the nois space, we have a (measurable) flow $\theta: G \times \Omega \to \Omega$ which 'evolves' the noise. This must satisfy $\theta(0, \cdot) = \text{Id}$, and $\theta_{t+s} = \theta_t \circ \theta_s$. Then, a random dynamical system $\Phi$ is a measurable map $\Phi: G \times \Omega \times X \to X$ which satisfies the following cocycle condition: 
+
+\[ \Phi(t+s, \omega, x) = \Phi(t, \theta_s(\omega), \Phi(s, \omega, x))\]
+
+This cocycle condition should be read as 'evolving a random dynamical system for time $t+s$' should be the same as 'evolve a system for time $s$, followed be evolving it for time $t$ starting the noise at $s$'. This is a mouthful, so let's look at a simple example. 
+
+**Example 6.1 Random rotations on a circle:**
+     We work in discrete time. We fix an angle $\alpha$, and at each time, we will flip a fair coin, and rotate clockwise or anticlockwise according to it. 
+
+In this example, since time is discrete, we fix our semigroup to be $G= \mathbb{N}$. Our state space $X=S^1$, which we write multiplicatively with the usual Haar measure and $\sigma$-algebra. Our noise space is our sequence of flips: the space is $\Omega = \{0,1 \}^\mathbb{N}$, with the cylindrical Bernoulli measure we defined earlier. The noise evolution map $\theta$ is just given by the left-shift, and the dynamics are given by (for one time step), $\Phi(\omega, z) = \Phi(\theta(\omega), \exp(i(-1)^{\omega_0} \alpha) \cdot z)$. We can get the action at time $t$ by iterating this using the cocycle condition. 
+
+
 <!-- TODO
 **Theorem 6.2.** All compact topological dynamical systems have an ergodic, invariant Borel probability measure.
 
