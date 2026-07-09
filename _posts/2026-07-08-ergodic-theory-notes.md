@@ -189,7 +189,7 @@ for all $n \geq 1$, which contradicts (4). $\blacksquare$
 
 Ergodicity should be understood as a sort of irreducibility criterion: there is no way to break our state space into two nontrivial subspaces that are invariant under the dynamics.
 
-![Ergodicity as irreducibility. Left: a non-ergodic system whose state space splits into two invariant pieces. Right: an ergodic system, where almost every orbit visits every part of the space.](/images/ergodic/fig_ergodic_decomposition.png)
+![Ergodicity as irreducibility. Left: a non-ergodic system whose state space splits into two invariant pieces. Right: an ergodic system, where almost every orbit visits every part of the space.](/images/fig_ergodic_decomposition.png)
 
 ## 2. The Koopman Operator
 
