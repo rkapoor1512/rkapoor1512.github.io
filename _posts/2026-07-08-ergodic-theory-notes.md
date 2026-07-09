@@ -2,6 +2,7 @@
 title: 'Notes on Ergodic Theory'
 date: 2026-07-08
 permalink: /posts/2026/07/ergodic-theory/
+excerpt: "A set of study notes on ergodic theory, with a special view toward studying dynamical systems via their Koopman operator"
 tags:
   - ergodic-theory
   - dynamical-systems
