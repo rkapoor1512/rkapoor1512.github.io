@@ -62,9 +62,9 @@ Let's work out some examples.
 
     which shows that this is an invariant measure. This example has deep connections to the math of continued fractions and number theory. $\blacksquare$
 
-![Orbits of the circle rotation $z \mapsto \alpha z$ on $S^1$. When $\alpha$ is rational every orbit closes up; when $\alpha$ is irrational, orbits are dense (Weyl equidistribution).](/images/ergodic/fig_circle_rotation.png)
+![Orbits of the circle rotation $z \mapsto \alpha z$ on $S^1$. When $\alpha$ is rational every orbit closes up; when $\alpha$ is irrational, orbits are dense .](/images/ergodic/fig_circle_rotation.png)
 
-![The doubling map on $[0,1]$. Left: the graph of $T(x) = 2x \bmod 1$ with a cobweb trajectory. Right: on binary expansions, $T$ acts as the left shift.](/images/ergodic/fig_doubling_map.png)
+![The doubling map on $[0,1]$. Left: the graph of $T(x) = 2x \bmod 1$ with a trajectory. Right: on binary expansions, $T$ acts as the left shift.](/images/ergodic/fig_doubling_map.png)
 
 ![The Gauss map $T(x) = 1/x - \lfloor 1/x \rfloor$ with its invariant density $\frac{1}{(1+x)\log 2}$ overlaid.](/images/ergodic/fig_gauss_map.png)
 
@@ -106,7 +106,6 @@ $$
 
 Since this sum must be finite, we must have $\mu(A) = 0$. $\blacksquare$
 
-![Poincaré recurrence: if points of $E$ never returned, then the preimages $T^{-n}(E)$ would be pairwise disjoint, each of measure $\mu(E)>0$; but a finite-measure space cannot contain infinitely many disjoint sets of equal positive measure.](/images/ergodic/fig_poincare_recurrence.png)
 
 Furthermore, we can strengthen this to prove that almost all points recur infinitely often. Let $A$ be the set of points that recur only finitely often. Then,
 
