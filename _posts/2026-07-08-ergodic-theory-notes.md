@@ -674,7 +674,7 @@ We can also use ergodic theory to study number theory. The key definition that a
 **Definition 6.5.** The upper density of a subset $S$ of the natural numbers $\mathbb{N}$ is defined as
 
 $$
-d(S) = \limsup_{n \to \infty} \frac{{\text{Number of elements of } S \leq n\\}}{n}.
+d(S) = \limsup_{n \to \infty} \frac{\text{Number of elements of } S \leq n\\}{n}.
 $$
 
 This upper density behaves "almost" like a measure, and a number of the proofs given for the measure-theoretic dynamics can be repeated for analogs with the upper density. The dynamics are then mostly given by translations of the natural numbers by a fixed difference $d$, to study arithmetic progressions. This allowed Furstenberg to present an ergodic-theoretic proof of Szemerédi's theorem:
