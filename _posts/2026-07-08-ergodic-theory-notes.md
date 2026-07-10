@@ -638,7 +638,9 @@ Note that in the case that $X$ is a measure space and $G$ is $\mathbb{N}$, we re
 
 This formalism also lends itself to define random dynamical systems quite easily. In a random dynamical system, the dynamical map at each timestep is not a deterministic map, but rather randomly chosen according to some distribution. The trick here, then, is to expand our state space to include the randomness, and view it as a deterministic dynamical system on this space. Formally, let $\Omega= (\Omega, \mathcal{F}, P)$ be a probability space, known as the noise space, and let $X= (X, \Sigma, \mu)$ be our standard state space. On the nois space, we have a (measurable) flow $\theta: G \times \Omega \to \Omega$ which 'evolves' the noise. This must satisfy $\theta(0, \cdot) = \text{Id}$, and $\theta_{t+s} = \theta_t \circ \theta_s$. Then, a random dynamical system $\Phi$ is a measurable map $\Phi: G \times \Omega \times X \to X$ which satisfies the following cocycle condition: 
 
-\[ \Phi(t+s, \omega, x) = \Phi(t, \theta_s(\omega), \Phi(s, \omega, x))\]
+$$
+\Phi(t+s, \omega, x) = \Phi(t, \theta_s(\omega), \Phi(s, \omega, x))
+$$
 
 This cocycle condition should be read as 'evolving a random dynamical system for time $t+s$' should be the same as 'evolve a system for time $s$, followed be evolving it for time $t$ starting the noise at $s$'. This is a mouthful, so let's look at a simple example. 
 
