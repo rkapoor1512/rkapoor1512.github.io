@@ -48,7 +48,7 @@ We consider two natural quality-score functions.
 **Score function 1: number of buyers.** Define $q_1(D, r)$ as the number of people willing to pay price $r$:
 
 $$
-q_1(D, r) = \lvert \lbracei : r \in D_i\rbrace\rvert.
+q_1(D, r) = \lvert \lbrace i : r \in D_i\rbrace\rvert.
 $$
 
 For our database $D$:
