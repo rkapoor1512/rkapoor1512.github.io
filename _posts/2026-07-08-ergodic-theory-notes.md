@@ -337,10 +337,10 @@ We give the slick proof by Riesz. Before that, note that if $U$ is unitary and $
 *Proof.* The statement is trivially true for $f \in \mathrm{fix}(T)$. Let $W$ be the subspace of vectors that can be written as $Uw - w$ for some $w \in H$. Then, given $v \in \mathrm{fix}(T)$ and $w \in H$, we have
 
 $$
-\langle v, Uw - w \rangle = \langle v, Uw \rangle - \langle v, w \rangle = \langle U^* v, w \rangle - \langle v, w \rangle = \langle v, w \rangle - \langle v, w \rangle = 0,
+\langle v, Uw - w \rangle = \langle v, Uw \rangle - \langle v, w \rangle = \langle U^{\ast} v, w \rangle - \langle v, w \rangle = \langle v, w \rangle - \langle v, w \rangle = 0,
 $$
 
-where we used the fact that $U^*v = v$ (since $v$ is invariant and $U$ is an isometry). Thus $W \perp \mathrm{fix}(T)$, and in particular, $P(Uw - w) = 0$. Furthermore, the sum $\frac{1}{N} \sum_{n=0}^{N-1} U^n(Uw - w)$ telescopes: we have
+where we used the fact that $U^{\ast}v = v$ (since $v$ is invariant and $U$ is an isometry). Thus $W \perp \mathrm{fix}(T)$, and in particular, $P(Uw - w) = 0$. Furthermore, the sum $\frac{1}{N} \sum_{n=0}^{N-1} U^n(Uw - w)$ telescopes: we have
 
 $$
 \frac{1}{N} \sum_{n=0}^{N-1} U^n(Uw - w) = \frac{1}{N}(U^N w - w).
