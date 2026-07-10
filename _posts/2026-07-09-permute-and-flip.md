@@ -34,13 +34,13 @@ Recall that $D$ and $D'$ are **neighbors** if they differ in the entry of exactl
 **Example 1.3 (Pricing).** Suppose we survey $4$ people, asking each one *all* the prices they would be willing to pay for a product. The database is
 
 $$
-D = \bigl(\lbrace1\rbrace,\; \lbrace1,2\rbrace,\; \lbrace1,2,3\rbrace,\; \lbrace1,2,3,4,5\rbrace\bigr).
+D = \bigl(\lbrace 1 \rbrace,\; \lbrace 1,2 \rbrace,\; \lbrace 1,2,3 \rbrace,\; \lbrace 1,2,3,4,5 \rbrace\bigr).
 $$
 
 The set of possible prices (outputs) is $R = \lbrace1, 2, 3, 4, 5\\}$. A neighboring database $D'$ differs from $D$ in exactly one person's response, e.g. replacing person 4's entry:
 
 $$
-D' = \bigl(\lbrace1\rbrace,\; \lbrace1,2\rbrace,\; \lbrace1,2,3\rbrace,\; \lbrace1,2,3\rbrace\bigr).
+D' = \bigl(\lbrace 1 \rbrace,\; \lbrace 1,2 \rbrace,\; \lbrace 1,2,3 \rbrace,\; \lbrace 1,2,3 \rbrace\bigr).
 $$
 
 We consider two natural quality-score functions.
