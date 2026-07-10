@@ -34,13 +34,13 @@ Recall that $D$ and $D'$ are **neighbors** if they differ in the entry of exactl
 **Example 1.3 (Pricing).** Suppose we survey $4$ people, asking each one *all* the prices they would be willing to pay for a product. The database is
 
 $$
-D = \bigl(\\{1\\},\; \\{1,2\\},\; \\{1,2,3\\},\; \\{1,2,3,4,5\\}\bigr).
+D = \bigl(\lbrace1\rbrace,\; \lbrace1,2\rbrace,\; \lbrace1,2,3\rbrace,\; \lbrace1,2,3,4,5\rbrace\bigr).
 $$
 
-The set of possible prices (outputs) is $R = \\{1, 2, 3, 4, 5\\}$. A neighboring database $D'$ differs from $D$ in exactly one person's response, e.g. replacing person 4's entry:
+The set of possible prices (outputs) is $R = \lbrace1, 2, 3, 4, 5\\}$. A neighboring database $D'$ differs from $D$ in exactly one person's response, e.g. replacing person 4's entry:
 
 $$
-D' = \bigl(\\{1\\},\; \\{1,2\\},\; \\{1,2,3\\},\; \\{1,2,3\\}\bigr).
+D' = \bigl(\lbrace1\rbrace,\; \lbrace1,2\rbrace,\; \lbrace1,2,3\rbrace,\; \lbrace1,2,3\rbrace\bigr).
 $$
 
 We consider two natural quality-score functions.
@@ -48,7 +48,7 @@ We consider two natural quality-score functions.
 **Score function 1: number of buyers.** Define $q_1(D, r)$ as the number of people willing to pay price $r$:
 
 $$
-q_1(D, r) = \lvert \\{i : r \in D_i\\} \rvert.
+q_1(D, r) = \lvert \lbracei : r \in D_i\rbrace\rvert.
 $$
 
 For our database $D$:
