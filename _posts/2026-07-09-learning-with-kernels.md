@@ -2,14 +2,15 @@
 title: 'Learning with Kernels'
 date: 2026-07-09
 permalink: /posts/2026/07/learning-with-kernels/
-excerpt: "A set of study notes on the mathematics of kernel machines: reproducing kernel Hilbert spaces, kernelized learning algorithms, and their connection to kernel integral operators."
+excerpt: "A set of study notes on the mathematics of kernels: reproducing kernel Hilbert spaces, kernelized learning algorithms, and their connection to kernel integral operators."
 tags:
   - kernel-methods
   - machine-learning
+  - rkhs
   - functional-analysis
 ---
 
-*These are a set of study notes on the mathematics of kernels. They are largely based on Schölkopf and Smola's **Learning with Kernels**. They study the theory of reproducing kernel Hilbert spaces, and kernelized algorithms for machine learning, and connect these to kernel integral operators and their regularization properties.*
+*These are a set of study notes on the mathematics of kernels. They are largely based on Schölkopf and Smola's **Learning with Kernels** [1]. They study the theory of reproducing kernel Hilbert spaces, and kernelized algorithms for machine learning, and connect these to kernel integral operators and their regularization properties.*
 
 ## 1. Support Vector Machines
 
@@ -104,7 +105,7 @@ These notes work through each of these benefits in detail.
 
 The previous section begs the question: what is this magical high-dimensional $\mathcal{H}$ into which our kernel is embedding the data? The answer is that it is a *reproducing kernel Hilbert space*, which we define and prove some basic facts about below. For this section, we work with vector spaces over $\mathbb{R}$ for simplicity.
 
-**Definition 3.1.** A **reproducing kernel Hilbert space** (RKHS) is a Hilbert space $H$ where point evaluation is continuous: for each $x$, the map $f \mapsto f(x)$ is bounded, i.e. $|f(x)| \leq M_x \|f\|_H$.
+**Definition 3.1.** A **reproducing kernel Hilbert space** (RKHS) is a Hilbert space $H$ where point evaluation is continuous: for each $x$, the map $f \mapsto f(x)$ is bounded, i.e. $\lvert f(x)\rvert \leq M_x \|f\|_H$.
 
 Then $f(x) = \langle f, K_x\rangle$ by the Riesz Representation Theorem, where $K_x(\cdot) = K(x, \cdot)$.
 
@@ -162,9 +163,9 @@ $$
 T_k f(x) - T_k f(y) = \int (k(x,t) - k(y,t)) f(t)\, d\mu(t) \leq \int |k(x,t) - k(y,t)|\, d\mu(t).
 $$
 
-Since $k$ is continuous on a compact set, it is uniformly continuous, and hence so is $(x,y) \mapsto \int |k(x,t) - k(y,t)|\, d\mu(t)$. $\square$
+Since $k$ is continuous on a compact set, it is uniformly continuous, and hence so is $(x,y) \mapsto \int \lvert k(x,t) - k(y,t)\rvert\, d\mu(t)$. $\square$
 
-Since $T_k$ is compact and self-adjoint, it has an orthonormal basis of eigenvectors $\psi_i$ with eigenvalues $\lambda_i$ satisfying $|\lambda_i| \to 0$. Since $T_k$ is positive, each $\lambda_i \geq 0$.
+Since $T_k$ is compact and self-adjoint, it has an orthonormal basis of eigenvectors $\psi_i$ with eigenvalues $\lambda_i$ satisfying $\lvert\lambda_i\rvert \to 0$. Since $T_k$ is positive, each $\lambda_i \geq 0$.
 
 **Theorem 4.2 (Mercer).** For a symmetric positive-definite kernel $k(x,y) : X \times X \to \mathbb{R}$,
 
@@ -185,7 +186,7 @@ There are a number of common loss functions. The first three are used for **clas
 - **Binary (0–1) loss.** This simply counts misclassifications:
 
 $$
-c(x,y,f(x)) = \mathbf{1}[\,y f(x) < 0\,] = \tfrac{1}{2}\,\lvert\,\text{sgn} f(x) - y\,\rvert.
+c(x,y,f(x)) = \mathbf{1}[\,y f(x) < 0\,] = \tfrac{1}{2}\,\lvert\,\operatorname{sgn} f(x) - y\,\rvert.
 $$
 
   It is the loss we truly care about, but it is non-convex and discontinuous, so in practice we minimize a convex **surrogate** that upper-bounds it. The next two are the most common such surrogates.
@@ -209,13 +210,13 @@ $$
 The remaining two are used for **regression**, where $Y = \mathbb{R}$, and depend on the residual $f(x) - y$.
 
 - **Squared (mean-square) loss.** $c(x,y,f(x)) = (f(x)-y)^2$. Smooth and strongly convex, but sensitive to outliers.
-- **$L^1$ loss.** $c(x,y,f(x)) = |f(x)-y|$. More robust to outliers, but not differentiable at $0$.
+- **$L^1$ loss.** $c(x,y,f(x)) = \lvert f(x)-y\rvert$. More robust to outliers, but not differentiable at $0$.
 
 ![Regression losses as a function of the residual $f(x) - y$.](/images/fig_loss_regression.png)
 
 Each of these satisfies the axiom $c(x,y,y) = 0$: a perfect prediction incurs no loss.
 
-In practice we assume our data comes from some probability distribution $P(x,y)$ on $X \times Y$, and we want to minimize the expected loss over this distribution to find a function $f_*$. We fix a function space $\mathcal{F}$ in which to optimize, and solve
+In practice we assume our data comes from some probability distribution $P(x,y)$ on $X \times Y$, and we want to minimize the expected loss over this distribution to find a function $f_\ast$. We fix a function space $\mathcal{F}$ in which to optimize, and solve
 
 $$
 f_* = \arg\min_{f \in \mathcal{F}} \mathbb{E}_P[c(x,y,f(x))] = \arg\min_{f \in \mathcal{F}} \int_{X \times Y} c(x,y,f(x))\, dP(x,y).
@@ -259,9 +260,7 @@ $$
 f^*(x) = \sum_{i=1}^n a_i\, K(x_i, x).
 $$
 
-*Proof* Let $H_n = \text{span}\\{K(x_i, \cdot)\\}_{i=1}^n$. Since this is finite-dimensional it is closed, so the projection onto it and its orthogonal complement are well-defined. 
-
-Write $f = f_\parallel + f_\perp$ with $f_\parallel \in H_n$ and $f_\perp \perp H_n$. Then
+*Proof.* Let $H_n = \text{span}\\{K(x_i, \cdot)\\}_{i=1}^n$. Since this is finite-dimensional it is closed, so the projection onto it and its orthogonal complement are well-defined. Write $f = f_\parallel + f_\perp$ with $f_\parallel \in H_n$ and $f_\perp \perp H_n$. Then
 
 $$
 f(x_j) = \langle f, K(x_j, \cdot)\rangle = \langle f_\parallel, K(x_j, \cdot)\rangle = f_\parallel(x_j),
@@ -273,21 +272,13 @@ $$
 \sum_i L(x_i, y_i, f(x_i)) = \sum_i L(x_i, y_i, f_\parallel(x_i)).
 $$
 
-But 
-
-$$
-\|f\|_H^2 = \|f_\parallel\|_H^2 + \|f_\perp\|_H^2 \geq \|f_\parallel\|_H^2
-$$
-
-Thus the first term of the risk depends only on $f_\parallel$, while the regularization term is only increased by a nonzero $f_\perp$. Hence $\|f_\perp\| = 0$ for the optimal $f$, which means $f \in \text{span}\\{K(x_i, \cdot)\\}_i$. $\square$
-
-<!-- TODO 
+But $\|f\|_H^2 = \|f_\parallel\|_H^2 + \|f_\perp\|_H^2 \geq \|f_\parallel\|_H^2$. Thus the first term of the risk depends only on $f_\parallel$, while the regularization term is only increased by a nonzero $f_\perp$. Hence $\|f_\perp\| = 0$ for the optimal $f$, which means $f \in \text{span}\\{K(x_i, \cdot)\\}_i$. $\square$
 
 ## 7. Regularization Operators
 
 Here we present a third perspective on kernel methods: viewing them as a regularization operator in some space. This ultimately connects, via Bochner's theorem, to a picture of translation-invariant kernels as regularizers in the frequency domain.
 
-A **regularization operator** $\Upsilon$ from a space of functions $\mathcal{F}$ into a Hilbert space $\mathcal{H}$ is an operator such that the regularization term is $\Omega(f) = \langle \Upsilon f, \Upsilon f \rangle_{\mathcal{H}}$. Without loss of generality we may assume $\Upsilon$ is positive: if it is not, we replace it by $\Upsilon' = (\Upsilon^* \Upsilon)^{1/2}$, which has the same property and exists as the positive square root of a positive operator.
+A **regularization operator** $\Upsilon$ from a space of functions $\mathcal{F}$ into a Hilbert space $\mathcal{H}$ is an operator such that the regularization term is $\Omega(f) = \langle \Upsilon f, \Upsilon f \rangle_{\mathcal{H}}$. Without loss of generality we may assume $\Upsilon$ is positive: if it is not, we replace it by $\Upsilon' = (\Upsilon^\ast \Upsilon)^{1/2}$, which has the same property and exists as the positive square root of a positive operator.
 
 ## 8. Random Fourier Features
 
@@ -298,7 +289,7 @@ Finally, we restrict to **translation-invariant** kernels.
 Such kernels admit an abstract characterization via **Bochner's theorem**, which in turn gives a way to write randomized kernel algorithms (random Fourier features).
 
 ---
--->
+
 *These notes are a work in progress. The proof of Mercer's theorem, the kernel mean embedding, and the random Fourier features / Bochner's theorem material are still being written and will be added.*
 
 ## References

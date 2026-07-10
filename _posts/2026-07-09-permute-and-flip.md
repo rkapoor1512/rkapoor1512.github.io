@@ -94,7 +94,7 @@ Both the exponential mechanism and permute-and-flip satisfy all three properties
 **The objective.** As usual in private selection, the goal is to minimize the expected error
 
 $$
-\mathcal{E} = \mathbb{E}[q_* - q(D, M(D))], \qquad q_* = \max_{r \in R} q(D, r),
+\mathcal{E} = \mathbb{E}[q_\ast - q(D, M(D))], \qquad q_\ast = \max_{r \in R} q(D, r),
 $$
 
 subject to the mechanism $M$ being $\varepsilon$-differentially private.
@@ -110,9 +110,9 @@ The mechanism is remarkably simple. Given the score vector, we shuffle the outpu
 *Output:* a differentially private output $r \in R$.
 
 1. Randomly permute the list of outputs $R$.
-2. Let $q_* = \max_{r \in R} q(D, r)$.
+2. Let $q_\ast = \max_{r \in R} q(D, r)$.
 3. For each output $r$ in the permuted order:
-   - Flip a coin with heads probability $\exp\!\left(\dfrac{\varepsilon\,(q(D, r) - q_*)}{2\Delta}\right)$.
+   - Flip a coin with heads probability $\exp\!\left(\dfrac{\varepsilon\,(q(D, r) - q_\ast)}{2\Delta}\right)$.
    - If heads, return $r$.
 
 Note that the maximizer always has coin probability $1$, so the algorithm always terminates (worst case, at the last position in the shuffle).
@@ -141,26 +141,26 @@ $$
 
 This gives $\lvert R \rvert$ inequalities. To maximize the probability of selecting the highest-quality output, we
 
-1. **Make the inequalities tight** for outputs with $q_r < q_*$: assign them the lowest probability consistent with differential privacy.
-2. **Distribute the remaining probability evenly** among all outputs achieving $q_*$ (by symmetry).
+1. **Make the inequalities tight** for outputs with $q_r < q_\ast$: assign them the lowest probability consistent with differential privacy.
+2. **Distribute the remaining probability evenly** among all outputs achieving $q_\ast$ (by symmetry).
 
 Thus, we can solve the linear program given by the following $n = \lvert R \rvert$ equations:
 
 $$
 \Pr[M(\vec{q}) = r] =
 \begin{cases}
-\exp(-\varepsilon)\,\Pr[M(\vec{q} + 2\Delta\, \vec{e}_r) = r] & q_r \leq q_* - 2\Delta, \\
+\exp(-\varepsilon)\,\Pr[M(\vec{q} + 2\Delta\, \vec{e}_r) = r] & q_r \leq q_\ast - 2\Delta, \\
 \dfrac{1}{n_{\ast}}\left(1 - \displaystyle\sum_{s :\, q_s < q_{\ast}} \Pr[M(\vec{q}) = s]\right) & q_r = q_{\ast},
 \end{cases}
 $$
 
-where $n_* = \lvert \\{r : q_r = q_*\\} \rvert$. Iterating the tight inequality $(q_* - q_r)/(2\Delta)$ times raises the score at $r$ all the way to $q_*$, giving the equivalent closed form
+where $n_\ast = \lvert \\{r : q_r = q_\ast\\} \rvert$. Iterating the tight inequality $(q_\ast - q_r)/(2\Delta)$ times raises the score at $r$ all the way to $q_\ast$, giving the equivalent closed form
 
 $$
-\Pr[M(\vec{q}) = r] = \exp\!\left(\frac{\varepsilon}{2\Delta}(q_r - q_*)\right)\Pr[M(\vec{q}^{(r)}) = r], \qquad q_r < q_*,
+\Pr[M(\vec{q}) = r] = \exp\!\left(\frac{\varepsilon}{2\Delta}(q_r - q_\ast)\right)\Pr[M(\vec{q}^{(r)}) = r], \qquad q_r < q_\ast,
 $$
 
-where $\vec{q}^{(r)}$ denotes $\vec{q}$ with its $r$-th entry raised to $q_*$.
+where $\vec{q}^{(r)}$ denotes $\vec{q}$ with its $r$-th entry raised to $q_\ast$.
 
 In general, this optimization can be solved in $O(n \log n)$ time by sorting the scores. Permute-and-flip achieves this optimum in closed form.
 
@@ -203,29 +203,29 @@ The equivalence between permute-and-flip and Report Noisy Max with exponential n
 
 **Intermediate algorithm $A$.**
 
-1. Compute $q_* = \max_i q(D, \omega_i)$.
+1. Compute $q_\ast = \max_i q(D, \omega_i)$.
 2. For each $i$: set $v_i = q(D, \omega_i) + \mathrm{Exp}(\varepsilon/(2\Delta))$.
-3. Form $S = \\{i : v_i \geq q_*\\}$.
+3. Form $S = \\{i : v_i \geq q_\ast\\}$.
 4. Return a uniformly random element of $S$.
 
-Algorithm $A$ adds exponential noise to each score, collects the outcomes whose noisy score reaches the true maximum $q_*$, and then selects uniformly at random from this set.
+Algorithm $A$ adds exponential noise to each score, collects the outcomes whose noisy score reaches the true maximum $q_\ast$, and then selects uniformly at random from this set.
 
 **Intermediate algorithm $B$.**
 
-1. Compute $q_* = \max_i q(D, \omega_i)$.
-2. For each $i$: set $\tilde{v}_i = \min\\{q_*,\; q(D, \omega_i) + \mathrm{Exp}(\varepsilon/(2\Delta))\\}$ and $z_i = \mathrm{Exp}(\varepsilon/(2\Delta))$.
-3. Form $S' = \\{i : \tilde{v}_i = q_*\\}$.
-4. Return $\arg\max_{i \in S'}(\tilde{v}_i + z_i)$, which equals $\arg\max_{i \in S'} z_i$ since $\tilde{v}_i = q_*$ on $S'$.
+1. Compute $q_\ast = \max_i q(D, \omega_i)$.
+2. For each $i$: set $\tilde{v}_i = \min\\{q_\ast,\; q(D, \omega_i) + \mathrm{Exp}(\varepsilon/(2\Delta))\\}$ and $z_i = \mathrm{Exp}(\varepsilon/(2\Delta))$.
+3. Form $S' = \\{i : \tilde{v}_i = q_\ast\\}$.
+4. Return $\arg\max_{i \in S'}(\tilde{v}_i + z_i)$, which equals $\arg\max_{i \in S'} z_i$ since $\tilde{v}_i = q_\ast$ on $S'$.
 
-Algorithm $B$ **truncates** each noisy score at $q_*$, then adds fresh exponential noise $z_i$ and returns the argmax among the elements that reached the threshold.
+Algorithm $B$ **truncates** each noisy score at $q_\ast$, then adds fresh exponential noise $z_i$ and returns the argmax among the elements that reached the threshold.
 
 **Theorem 5.1.** Permute-and-flip and Report Noisy Max with exponential noise produce identical output distributions.
 
 *Sketch.* We chain four equivalences.
 
-*(i) Permute-and-flip $\Leftrightarrow$ Algorithm $A$.* In Algorithm $A$, the probability that outcome $i$ enters $S$ (i.e. that $v_i \geq q_*$) equals $\exp(\varepsilon(q(D, \omega_i) - q_*) / (2\Delta))$, which is exactly the coin-flip probability in permute-and-flip. To see this, recall that for $X \sim \mathrm{Exp}(\lambda)$, $\Pr(X > x) = e^{-\lambda x}$. Setting $\lambda = \varepsilon/(2\Delta)$ and $x = q_* - q_r$ recovers the flip probability. Returning a uniformly random element of $S$ is equivalent to shuffling and returning the first element that lands in $S$.
+*(i) Permute-and-flip $\Leftrightarrow$ Algorithm $A$.* In Algorithm $A$, the probability that outcome $i$ enters $S$ (i.e. that $v_i \geq q_\ast$) equals $\exp(\varepsilon(q(D, \omega_i) - q_\ast) / (2\Delta))$, which is exactly the coin-flip probability in permute-and-flip. To see this, recall that for $X \sim \mathrm{Exp}(\lambda)$, $\Pr(X > x) = e^{-\lambda x}$. Setting $\lambda = \varepsilon/(2\Delta)$ and $x = q_\ast - q_r$ recovers the flip probability. Returning a uniformly random element of $S$ is equivalent to shuffling and returning the first element that lands in $S$.
 
-*(ii) Algorithm $A$ $\Leftrightarrow$ Algorithm $B$.* The set $S' = \\{i : \tilde{v}_i = q_*\\}$ is exactly $S$ from Algorithm $A$. By the independence of the second noise process from the first, adding fresh exponential noise $z_i$ and taking the argmax is equivalent to picking a uniformly random element of $S'$.
+*(ii) Algorithm $A$ $\Leftrightarrow$ Algorithm $B$.* The set $S' = \\{i : \tilde{v}_i = q_\ast\\}$ is exactly $S$ from Algorithm $A$. By the independence of the second noise process from the first, adding fresh exponential noise $z_i$ and taking the argmax is equivalent to picking a uniformly random element of $S'$.
 
 *(iii) Algorithm $B$ $\Leftrightarrow$ Report Noisy Max.* Algorithm $B$ effectively adds exponential noise to every score and outputs the argmax; it just adds the noise in a conditional way, splitting it into a truncated piece and a fresh piece. This works because of the **memoryless property** of the exponential: for $X \sim \mathrm{Exp}(\lambda)$ and any $s, t \geq 0$,
 

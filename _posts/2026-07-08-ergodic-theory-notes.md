@@ -227,7 +227,7 @@ $$
 \int_X f(y)\, \overline{g(T^{-1}y)}\, d\mu = \langle f, U_{T^{-1}} g \rangle.
 $$
 
-Thus, we see that $U_T^* = U_T^{-1} = U_{T^{-1}}$, and thus the Koopman operator is unitary. $\blacksquare$
+Thus, we see that $U_T^\ast = U_T^{-1} = U_{T^{-1}}$, and thus the Koopman operator is unitary. $\blacksquare$
 
 This gives us a new spectral characterization of ergodicity:
 
@@ -332,7 +332,7 @@ $$
 
 in the $L^2$ norm.
 
-We give the slick proof by Riesz. Before that, note that if $U$ is unitary and $Uv = v$, we have $U^*v = U^*Uv = Iv = v$.
+We give the slick proof by Riesz. Before that, note that if $U$ is unitary and $Uv = v$, we have $U^\ast v = U^\ast Uv = Iv = v$.
 
 *Proof.* The statement is trivially true for $f \in \mathrm{fix}(T)$. Let $W$ be the subspace of vectors that can be written as $Uw - w$ for some $w \in H$. Then, given $v \in \mathrm{fix}(T)$ and $w \in H$, we have
 
@@ -368,7 +368,7 @@ $$
 0 = \langle g, Uf - f \rangle = \langle g, Uf \rangle - \langle g, f \rangle \implies \langle f, U^*g - g \rangle = 0.
 $$
 
-But this is true for all $f$, and hence $U^*g - g = 0$. Since $U$ is unitary, this implies $Ug = g$. Thus $g \in \mathrm{fix}(T)$, contradicting $g \perp \mathrm{fix}(T)$ unless $g = 0$. Therefore, $\overline{\mathrm{fix}(T) + W} = H$.
+But this is true for all $f$, and hence $U^\ast g - g = 0$. Since $U$ is unitary, this implies $Ug = g$. Thus $g \in \mathrm{fix}(T)$, contradicting $g \perp \mathrm{fix}(T)$ unless $g = 0$. Therefore, $\overline{\mathrm{fix}(T) + W} = H$.
 
 The convergence for general $f \in H$ follows by approximation. $\blacksquare$
 
