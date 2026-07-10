@@ -309,7 +309,7 @@ The next theorem proves some basic spectral properties of the Koopman operator, 
 3. Let $Uf = \alpha f$ and $Ug = \beta g$. Then,
 
     $$
-    U(f\overline{g}) = (f\overline{g}) \circ T = (f \circ T)\cdot(\overline{g} \circ T) = (\alpha f)\cdot(\overline{\beta g}) = \alpha \overline{\beta} f \overline{g}.
+    U(f\overline{g}) = (f\overline{g}) \circ T = (f \circ T)\cdot(\overline{g} \circ T) = (\alpha f)\cdot(\overline{\beta g}) = \alpha \overline{\beta} f \overline{g}
     $$
 
     This implies that $\alpha \overline{\beta}$ is also an eigenvalue, and therefore the eigenvalues form a subgroup. $\blacksquare$
