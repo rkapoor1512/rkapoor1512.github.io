@@ -150,7 +150,7 @@ $$
 \Pr[M(\vec{q}) = r] =
 \begin{cases}
 \exp(-\varepsilon)\,\Pr[M(\vec{q} + 2\Delta\, \vec{e}_r) = r] & q_r \leq q_* - 2\Delta, \\
-\dfrac{1}{n_*}\left(1 - \displaystyle\sum_{s :\, q_s < q_*} \Pr[M(\vec{q}) = s]\right) & q_r = q_*,
+\dfrac{1}{n_{\ast}}\left(1 - \displaystyle\sum_{s :\, q_s < q_{\ast}} \Pr[M(\vec{q}) = s]\right) & q_r = q_{\ast},
 \end{cases}
 $$
 
