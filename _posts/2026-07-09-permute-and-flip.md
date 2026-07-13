@@ -213,9 +213,9 @@ Algorithm $A$ adds exponential noise to each score, collects the outcomes whose 
 **Intermediate algorithm $B$.**
 
 1. Compute $q_\ast = \max_i q(D, \omega_i)$.
-2. For each $i$: set $\tilde{v}_i = \min\\{q_\ast,\; q(D, \omega_i) + \mathrm{Exp}(\varepsilon/(2\Delta))\\}$ and $z_i = \mathrm{Exp}(\varepsilon/(2\Delta))$.
-3. Form $S' = \\{i : \tilde{v}_i = q_\ast\\}$.
-4. Return $\arg\max_{i \in S'}(\tilde{v}_i + z_i)$, which equals $\arg\max_{i \in S'} z_i$ since $\tilde{v}_i = q_\ast$ on $S'$.
+2. For each $i$: set $\tilde v_i = \min\\{q_\ast,\; q(D, \omega_i) + \mathrm{Exp}(\varepsilon/(2\Delta))\\}$ and $z_i = \mathrm{Exp}(\varepsilon/(2\Delta))$.
+3. Form $S' = \\{i : \tilde v_i = q_\ast\\}$.
+4. Return $\arg\max_{i \in S'}(\tilde v_i + z_i)$, which equals $\arg\max_{i \in S'} z_i$ since $\tilde v_i = q_\ast$ on $S'$.
 
 Algorithm $B$ **truncates** each noisy score at $q_\ast$, then adds fresh exponential noise $z_i$ and returns the argmax among the elements that reached the threshold.
 
@@ -225,7 +225,7 @@ Algorithm $B$ **truncates** each noisy score at $q_\ast$, then adds fresh expone
 
 *(i) Permute-and-flip $\Leftrightarrow$ Algorithm $A$.* In Algorithm $A$, the probability that outcome $i$ enters $S$ (i.e. that $v_i \geq q_\ast$) equals $\exp(\varepsilon(q(D, \omega_i) - q_\ast) / (2\Delta))$, which is exactly the coin-flip probability in permute-and-flip. To see this, recall that for $X \sim \mathrm{Exp}(\lambda)$, $\Pr(X > x) = e^{-\lambda x}$. Setting $\lambda = \varepsilon/(2\Delta)$ and $x = q_\ast - q_r$ recovers the flip probability. Returning a uniformly random element of $S$ is equivalent to shuffling and returning the first element that lands in $S$.
 
-*(ii) Algorithm $A$ $\Leftrightarrow$ Algorithm $B$.* The set $S' = \\{i : \tilde{v}_i = q_\ast\\}$ is exactly $S$ from Algorithm $A$. By the independence of the second noise process from the first, adding fresh exponential noise $z_i$ and taking the argmax is equivalent to picking a uniformly random element of $S'$.
+*(ii) Algorithm $A$ $\Leftrightarrow$ Algorithm $B$.* The set $S' = \\{i : \tilde v_i = q_\ast\\}$ is exactly $S$ from Algorithm $A$. By the independence of the second noise process from the first, adding fresh exponential noise $z_i$ and taking the argmax is equivalent to picking a uniformly random element of $S'$.
 
 *(iii) Algorithm $B$ $\Leftrightarrow$ Report Noisy Max.* Algorithm $B$ effectively adds exponential noise to every score and outputs the argmax; it just adds the noise in a conditional way, splitting it into a truncated piece and a fresh piece. This works because of the **memoryless property** of the exponential: for $X \sim \mathrm{Exp}(\lambda)$ and any $s, t \geq 0$,
 
