@@ -244,14 +244,10 @@ $$
 
 Here $\lambda$ is the **regularization parameter**: small $\lambda$ regularizes weakly, large $\lambda$ regularizes strongly. We now leave statistical learning theory aside and focus on the mathematical problem of actually solving this.
 
-## 6. The Representer Theorem
-
-Reproducing kernel Hilbert spaces are in general infinite-dimensional, and optimizing over infinite-dimensional spaces seems hard. However — and this is key to the kernel trick — the representer theorem tells us that optimizing over an infinite-dimensional RKHS is tractable: the best fit to the data $\\{x_i\\}$ is a ***finite*** linear combination of the feature vectors $K(x_i, \cdot)$. We therefore only need to learn finitely many coefficients.
-
 **Theorem 6.1 (Representer Theorem).** Given a training sample $(x_1, y_1), \ldots, (x_n, y_n) \in X \times \mathbb{R}$, a loss function $L : X \times \mathbb{R} \times \mathbb{R} \to \mathbb{R}$, and a strictly increasing $\Omega$, the minimizer in $H$ of
 
 $$
-\sum_{i=1}^n L(x_i, y_i, f(x_i)) + \lambda\, \Omega(\|f\|_H)^2
+\sum_{i=1}^n L(x_i, y_i, f(x_i)) + \lambda\, \Omega(\lVert f\rVert_H)^2
 $$
 
 is of the form
@@ -272,8 +268,8 @@ $$
 \sum_i L(x_i, y_i, f(x_i)) = \sum_i L(x_i, y_i, f_\parallel(x_i)).
 $$
 
-But $\|f\|_H^2 = \|f_\parallel\|_H^2 + \|f_\perp\|_H^2 \geq \|f_\parallel\|_H^2$. Thus the first term of the risk depends only on $f_\parallel$, while the regularization term is only increased by a nonzero $f_\perp$. Hence $\|f_\perp\| = 0$ for the optimal $f$, which means $f \in \text{span}\\{K(x_i, \cdot)\\}_i$. $\square$
-
+But $\lVert f\rVert_H^2 = \lVert f_\parallel\rVert_H^2 + \lVert f_\perp\rVert_H^2 \geq \lVert f_\parallel\rVert_H^2$. Thus the first term of the risk depends only on $f_\parallel$, while the regularization term is only increased by a nonzero $f_\perp$. Hence $\lVert f_\perp\rVert = 0$ for the optimal $f$, which means $f \in \text{span}\\{K(x_i, \cdot)\\}_i$. $\square$
+<!-- 
 ## 7. Regularization Operators
 
 Here we present a third perspective on kernel methods: viewing them as a regularization operator in some space. This ultimately connects, via Bochner's theorem, to a picture of translation-invariant kernels as regularizers in the frequency domain.
@@ -289,7 +285,7 @@ Finally, we restrict to **translation-invariant** kernels.
 Such kernels admit an abstract characterization via **Bochner's theorem**, which in turn gives a way to write randomized kernel algorithms (random Fourier features).
 
 ---
-
+-->
 *These notes are a work in progress. The proof of Mercer's theorem, the kernel mean embedding, and the random Fourier features / Bochner's theorem material are still being written and will be added.*
 
 ## References
