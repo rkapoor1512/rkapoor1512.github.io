@@ -256,7 +256,13 @@ $$
 f^*(x) = \sum_{i=1}^n a_i\, K(x_i, x).
 $$
 
-*Proof.* Let $H_n = \text{span}\\{K(x_i, \cdot)\\}_{i=1}^n$. Since this is finite-dimensional it is closed, so the projection onto it and its orthogonal complement are well-defined. Write $f = f_\parallel + f_\perp$ with $f_\parallel \in H_n$ and $f_\perp \perp H_n$. Then
+Proof. Let 
+
+$$
+H_n = \text{span}\\{K(x_i, \cdot)\\}_{i=1}^n
+$$
+
+Since this is finite-dimensional it is closed, so the projection onto it and its orthogonal complement are well-defined. Write $f = f_\parallel + f_\perp$ with $f_\parallel \in H_n$ and $f_\perp \perp H_n$. Then
 
 $$
 f(x_j) = \langle f, K(x_j, \cdot)\rangle = \langle f_\parallel, K(x_j, \cdot)\rangle = f_\parallel(x_j),
@@ -270,6 +276,24 @@ $$
 
 But $\lVert f\rVert_H^2 = \lVert f_\parallel\rVert_H^2 + \lVert f_\perp\rVert_H^2 \geq \lVert f_\parallel\rVert_H^2$. Thus the first term of the risk depends only on $f_\parallel$, while the regularization term is only increased by a nonzero $f_\perp$. Hence $\lVert f_\perp\rVert = 0$ for the optimal $f$, which means $f \in \text{span}\\{K(x_i, \cdot)\\}_i$. $\square$
 {% comment %} 
+## 7. Kernel Mean Embedding
+
+Until now, we have worked on lifting single data points into a reproducing kernel Hilbert space. We can work on one higher layer of abstraction, and also embed entire probability distributions into RKHSs. Here, we will assume $M$ is compact and the kernel function $k$ is continuous. By $P(M)$ we denote the space of finite Borel measures on $M$. Then, The kernel mean embedding map is a map induced by a kernel function $k$, given by $E: P(M) \to \mathcal{H}$ given by 
+
+$$
+E(\mu)(x) = \int_M k(x,y) d\mu(y)
+$$
+
+We say that a kernel map $k(x,y)$ is a \textbf{characteristic} kernel function if the induced map $E$ is injective on probability distributions. In practice, we will assume a stronger property on our kernels: that they are in fact universal.
+
+A kernel function $k: M \times M \to \R$ is said to be universal if the reproducing kernel Hilbert space of functions $\mathcal{H}$ is dense in $C_b(M)$, ie, we have that for any $f \in C_b(M)$, there exists $h \in \mathcal{H}$ such that $\lVerth-f\rVert_\infty < \varepsilon$.
+
+This embedding induces a psuedometric on the space of probability measures: given two densities $\mu_1, \mu_2$, we can write a metric $d: P(M) \times P(M) \to \R_+$ given by $d(\mu_1, \mu_2) = \norm{E(\mu_1)-E(\mu_2)}_\mathcal{H}$. This is known as the maximum mean discrepancy. To see its relationship to other metrics on the space of probability distributions, we can define the notion of a integral probability metric. 
+
+
+
+
+
 ## 7. Regularization Operators
 
 Here we present a third perspective on kernel methods: viewing them as a regularization operator in some space. This ultimately connects, via Bochner's theorem, to a picture of translation-invariant kernels as regularizers in the frequency domain.
@@ -286,6 +310,8 @@ Such kernels admit an abstract characterization via **Bochner's theorem**, which
 
 ---
 {% endcomment %}
+
+
 *These notes are a work in progress. The proof of Mercer's theorem, the kernel mean embedding, and the random Fourier features / Bochner's theorem material are still being written and will be added.*
 
 ## References
