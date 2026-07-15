@@ -275,7 +275,9 @@ $$
 $$
 
 But $\lVert f\rVert_H^2 = \lVert f_\parallel\rVert_H^2 + \lVert f_\perp\rVert_H^2 \geq \lVert f_\parallel\rVert_H^2$. Thus the first term of the risk depends only on $f_\parallel$, while the regularization term is only increased by a nonzero $f_\perp$. Hence $\lVert f_\perp\rVert = 0$ for the optimal $f$, which means $f \in \text{span}\\{K(x_i, \cdot)\\}_i$. $\square$
+
 {% comment %} 
+
 ## 7. Kernel Mean Embedding
 
 Until now, we have worked on lifting single data points into a reproducing kernel Hilbert space. We can work on one higher layer of abstraction, and also embed entire probability distributions into RKHSs. Here, we will assume $M$ is compact and the kernel function $k$ is continuous. By $P(M)$ we denote the space of finite Borel measures on $M$. Then, The kernel mean embedding map is a map induced by a kernel function $k$, given by $E: P(M) \to \mathcal{H}$ given by 
@@ -302,7 +304,9 @@ A **regularization operator** $\Upsilon$ from a space of functions $\mathcal{F}$
 
 ## 8. Random Fourier Features
 
-Finally, we restrict to **translation-invariant** kernels.
+
+
+In this section, we restrict to **translation-invariant** kernels.
 
 **Definition 8.1.** A translation-invariant kernel is a kernel $k(x,y)$ that depends only on $x - y$. With a slight abuse of notation, we write $k(x,y) = k(x-y)$.
 
