@@ -184,7 +184,57 @@ $$
 
 where the sum on the right converges absolutely, and if $k$ is continuous, uniformly.
 
-*Proof (sketch).* We prove this in two stages. First, we show that $\sum_{i=1}^\infty \lambda_i \psi_i(x) \psi_i(y)$ converges absolutely to a kernel $k_0$. Then, we show that the map $k \mapsto T_k$ is injective; since $k$ and $k_0$ induce the same kernel integral operator, they must coincide. The starting point is the identity $\lambda_i \psi_i(x) = T_k \psi_i(x) = \int k(x,y) \psi_i(y)\, d\mu(y)$. *(The remaining convergence estimates are still being written up.)*
+*Proof.* Assume throughout that $\mu$ has full support; otherwise everything below holds with $\operatorname{supp}\mu$ in place of $X$. Write
+
+$$
+s_n(x,y) = \sum_{i=1}^n \lambda_i \psi_i(x)\psi_i(y), \qquad k_n = k - s_n,
+$$
+
+and let $r_n(x) = k_n(x,x)$ be the *diagonal defect*.
+
+**Step 1: the eigenfunctions are continuous.** If $\lambda_i > 0$ then $\psi_i = \lambda_i^{-1} T_k \psi_i$, so it is enough that $T_k$ maps $L^2(\mu)$ into $C(X)$. By Cauchy–Schwarz,
+
+$$
+\lvert T_k f(x) - T_k f(x')\rvert \leq \lVert k(x,\cdot) - k(x',\cdot)\rVert_{L^2(\mu)}\, \lVert f\rVert_{L^2(\mu)},
+$$
+
+and $k$ is uniformly continuous on the compact space $X \times X$, so the right-hand side tends to $0$ as $x' \to x$. Hence we may take every $\psi_i$ with $\lambda_i > 0$ continuous, and each $k_n$ is continuous.
+
+**Step 2: the diagonal bound.** The integral operator of $k_n$ is $T_k$ precomposed with the orthogonal projection onto $\operatorname{span}\\{\psi_1, \ldots, \psi_n\\}^{\perp}$, so $T_{k_n} \geq 0$. A *continuous* kernel with a positive integral operator is nonnegative on the diagonal: if $k_n(x_0,x_0) < 0$ then by continuity $k_n < 0$ on $B \times B$ for some ball $B \ni x_0$, and testing against $\chi_B$ gives $\langle T_{k_n}\chi_B, \chi_B\rangle < 0$ — using $\mu(B) > 0$, which is where full support is needed. Therefore $r_n \geq 0$, i.e.
+
+$$
+\sum_{i=1}^n \lambda_i \psi_i(x)^2 \leq k(x,x) \leq M := \max_{x \in X} k(x,x) \quad \text{for every } n,
+$$
+
+so $\sum_{i=1}^\infty \lambda_i \psi_i(x)^2$ converges at every $x$, with sum at most $k(x,x)$.
+
+**Step 3: absolute convergence.** By Cauchy–Schwarz, for $m \leq n$,
+
+$$
+\sum_{i=m}^n \lambda_i \lvert \psi_i(x)\psi_i(y)\rvert \leq \left(\sum_{i=m}^n \lambda_i \psi_i(x)^2\right)^{1/2}\left(\sum_{i=m}^n \lambda_i \psi_i(y)^2\right)^{1/2} \leq M^{1/2}\left(\sum_{i \geq m} \lambda_i \psi_i(x)^2\right)^{1/2}.
+$$
+
+By Step 2 the right-hand side tends to $0$ as $m \to \infty$, so $k_0(x,y) := \sum_{i=1}^\infty \lambda_i \psi_i(x)\psi_i(y)$ converges absolutely at every point, with $\lvert k_0\rvert \leq M$. Since each $k_n$ is a continuous kernel with $T_{k_n} \geq 0$, it obeys the Cauchy–Schwarz inequality for positive-semidefinite kernels, which controls the whole square by the diagonal:
+
+$$
+\lvert k(x,y) - s_n(x,y)\rvert^2 \leq r_n(x)\, r_n(y).
+$$
+
+**Step 4: $k_0 = k$.** Fix $x$. The function $k(x,\cdot)$ lies in $L^2(\mu)$ and its Fourier coefficients against the basis are $\langle k(x,\cdot), \psi_i\rangle = T_k\psi_i(x) = \lambda_i \psi_i(x)$. It is also orthogonal to $\ker T_k$, since $\psi \in \ker T_k$ gives $\langle k(x,\cdot), \psi\rangle = T_k\psi(x) = 0$. Hence $s_n(x,\cdot) \to k(x,\cdot)$ in $L^2(\mu)$. But by Step 3, $s_n(x,\cdot) \to k_0(x,\cdot)$ pointwise and boundedly, so also in $L^2(\mu)$. Therefore $k(x,y) = k_0(x,y)$ for $\mu$-almost every $y$, for every $x$.
+
+**Step 5: uniform convergence.** It remains to see that $r_n \to 0$ pointwise, which upgrades Step 4 to equality everywhere. Since $r_n$ is a decreasing sequence of continuous nonnegative functions, $\int_X r_n\, d\mu = \int_X k(x,x)\, d\mu(x) - \sum_{i \leq n}\lambda_i$, so $r_n \downarrow 0$ pointwise exactly when
+
+$$
+\sum_{i=1}^\infty \lambda_i = \int_X k(x,x)\, d\mu(x),
+$$
+
+the **trace identity** for continuous positive-definite kernels. This is the substantive input to Mercer's theorem, and we take it as known here. Granted it, $r_n$ is a decreasing sequence of continuous functions converging pointwise to the continuous function $0$ on a compact space, so by **Dini's theorem** the convergence is uniform. Feeding this back into the bound of Step 3,
+
+$$
+\sup_{x,y} \lvert k(x,y) - s_n(x,y)\rvert \leq \sup_x r_n(x) \to 0,
+$$
+
+so the expansion converges uniformly, and absolutely by Step 3. $\square$
 
 ## 5. Risk Minimization
 
@@ -295,13 +345,19 @@ $$
 
 But $\lVert f\rVert_H^2 = \lVert f_\parallel\rVert_H^2 + \lVert f_\perp\rVert_H^2 \geq \lVert f_\parallel\rVert_H^2$. Thus the first term of the risk depends only on $f_\parallel$, while the regularization term is only increased by a nonzero $f_\perp$. Hence $\lVert f_\perp\rVert = 0$ for the optimal $f$, which means $f \in \text{span}\\{K(x_i, \cdot)\\}_i$. $\square$
 
+{% comment %}
+HIDDEN 2026-07-28. This was section 7. To restore: un-comment, then
+renumber Kernel Mean Embedding back to 8 and Random Fourier Features to 9,
+along with their Definition/Theorem labels.
+
 ## 7. Regularization Operators
 
 Here we present a third perspective on kernel methods: viewing them as a regularization operator in some space. This ultimately connects, via Bochner's theorem, to a picture of translation-invariant kernels as regularizers in the frequency domain.
 
 A **regularization operator** $\Upsilon$ from a space of functions $\mathcal{F}$ into a Hilbert space $\mathcal{H}$ is an operator such that the regularization term is $\Omega(f) = \langle \Upsilon f, \Upsilon f \rangle_{\mathcal{H}}$. Without loss of generality we may assume $\Upsilon$ is positive: if it is not, we replace it by $\Upsilon' = (\Upsilon^\ast \Upsilon)^{1/2}$, which has the same property and exists as the positive square root of a positive operator.
+{% endcomment %}
 
-## 8. Kernel Mean Embedding
+## 7. Kernel Mean Embedding
 
 Until now, we have worked on lifting single data points into a reproducing kernel Hilbert space. We can work one level higher, and embed entire probability distributions into RKHSs. Here we assume $M$ is compact and the kernel $k$ is continuous. By $P(M)$ we denote the space of finite Borel measures on $M$. The **kernel mean embedding** induced by a kernel $k$ is the map $E : P(M) \to \mathcal{H}$ given by
 
@@ -311,7 +367,7 @@ $$
 
 We say that a kernel $k(x,y)$ is **characteristic** if the induced map $E$ is injective on probability distributions. In practice we assume a stronger property on our kernels: that they are in fact universal.
 
-**Definition 8.1.** A kernel $k : M \times M \to \mathbb{R}$ is **universal** if the reproducing kernel Hilbert space $\mathcal{H}$ is dense in $C_b(M)$: for every $f \in C_b(M)$ and every $\varepsilon > 0$ there exists $h \in \mathcal{H}$ with $\lVert h - f\rVert_\infty < \varepsilon$.
+**Definition 7.1.** A kernel $k : M \times M \to \mathbb{R}$ is **universal** if the reproducing kernel Hilbert space $\mathcal{H}$ is dense in $C_b(M)$: for every $f \in C_b(M)$ and every $\varepsilon > 0$ there exists $h \in \mathcal{H}$ with $\lVert h - f\rVert_\infty < \varepsilon$.
 
 This embedding induces a pseudometric on the space of probability measures: given $\mu_1, \mu_2$, set
 
@@ -321,7 +377,7 @@ $$
 
 This is known as the **maximum mean discrepancy** (MMD). To see its relationship to other metrics on the space of probability distributions, we define the notion of an integral probability metric.
 
-**Definition 8.2.** Given two probability measures $\mu_1$ and $\mu_2$ on a measurable space $\mathcal{X}$, an **integral probability metric** (IPM) is
+**Definition 7.2.** Given two probability measures $\mu_1$ and $\mu_2$ on a measurable space $\mathcal{X}$, an **integral probability metric** (IPM) is
 
 $$
 \gamma[\mathcal{F}, \mu_1, \mu_2] = \sup_{f \in \mathcal{F}} \left\{ \int f(\mathbf{x})\, d\mu_1(\mathbf{x}) - \int f(\mathbf{y})\, d\mu_2(\mathbf{y}) \right\},
@@ -336,7 +392,7 @@ Since $C_b(\mathcal{X})$ is difficult to work with in practice, we use more rest
 - Taking $\mathcal{F}_{\mathrm{TV}} = \\{ f : \lVert f\rVert_\infty \leq 1 \\}$, where $\lVert f\rVert_\infty = \sup_{\mathbf{x} \in \mathcal{X}} \lvert f(\mathbf{x})\rvert$, gives $\gamma[\mathcal{F}_{\mathrm{TV}}, \mu_1, \mu_2] = \lVert \mu_1 - \mu_2\rVert_1$, the **total variation distance**.
 - Writing $\lVert f\rVert_L := \sup\\{ \lvert f(\mathbf{x}) - f(\mathbf{y})\rvert / \rho(\mathbf{x}, \mathbf{y}) : \mathbf{x} \neq \mathbf{y} \in \mathcal{X} \\}$ for the Lipschitz semi-norm with respect to a metric $\rho$ on $\mathcal{X}$, and taking $\mathcal{F}_{\mathrm{W}} = \\{ f : \lVert f\rVert_L \leq 1 \\}$, yields the **Wasserstein $W_1$ distance** (sometimes called the earthmover distance).
 
-## 9. Random Fourier Features
+## 8. Random Fourier Features
 
 In Section 6 we saw that optimizing over an infinite-dimensional RKHS $\mathcal{H}$ reduces to learning a finite number of coefficients $\\{\alpha_i\\}$, one per data point:
 
@@ -358,11 +414,11 @@ $$
 
 reducing the problem to learning a relatively small number of coefficients. The question is how to build that approximation well. To do so, we restrict to translation-invariant kernels.
 
-**Definition 9.1.** A **translation-invariant** kernel is a kernel $k(x,y)$ that depends only on $x - y$. With a slight abuse of notation, we write $k(x,y) = k(x-y)$.
+**Definition 8.1.** A **translation-invariant** kernel is a kernel $k(x,y)$ that depends only on $x - y$. With a slight abuse of notation, we write $k(x,y) = k(x-y)$.
 
 Such kernels admit an abstract characterization via Bochner's theorem.
 
-**Theorem 9.2 (Bochner).** A (normalized) translation-invariant kernel $k(x-y)$ can be written as the Fourier transform of a finite Borel probability measure: there exists a measure $\Lambda(\omega)$ such that
+**Theorem 8.2 (Bochner).** A (normalized) translation-invariant kernel $k(x-y)$ can be written as the Fourier transform of a finite Borel probability measure: there exists a measure $\Lambda(\omega)$ such that
 
 $$
 k(x-y) = \int e^{i \omega \cdot (x-y)}\, d\Lambda(\omega).

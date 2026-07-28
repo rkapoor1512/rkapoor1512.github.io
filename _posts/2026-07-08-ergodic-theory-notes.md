@@ -541,6 +541,14 @@ We can then write the following characterization of ergodicity, weak-mixing, and
     \lim_{N \to \infty} \frac{1}{N} \sum_{n=0}^{N-1} \lvert \langle U^n f, f \rangle - \langle f, 1 \rangle \langle 1, f \rangle \rvert^2 = 0.
     $$
 
+Throughout, write
+
+$$
+c_n(f,g) = \langle U^n f, g \rangle - \langle f, 1 \rangle \langle 1, g \rangle,
+$$
+
+which is linear in $f$, conjugate-linear in $g$, and satisfies $\lvert c_n(f,g)\rvert \leq 2\lVert f\rVert \lVert g\rVert$, since $U$ is an isometry and $\lVert 1\rVert = 1$.
+
 **(2) $\Rightarrow$ (1):** Set $f = \chi_A$, $g = \chi_B$. Then we have that
 
 $$
@@ -551,7 +559,53 @@ This shows $T$ is weak-mixing.
 
 **(2) $\Rightarrow$ (3):** Set $f = g$.
 
-**(1) $\Rightarrow$ (3):** Note that weak-mixing implies the statement is true for all characteristic functions $\chi_A$, $A \subset X$. We can extend this by linearity to all simple functions $h$. Now, we know that the simple functions are dense in $L^2(\mu)$. Let $f$ be an arbitrary function in $L^2(\mu)$, and fix $\varepsilon > 0$. Now, consider $h$ such that $\lVert h - f \rVert < \varepsilon$. *(To be completed.)* $\blacksquare$
+**(1) $\Rightarrow$ (2):** Weak-mixing is exactly the statement for $f = \chi_A$, $g = \chi_B$. Since $c_n$ is sesquilinear, it extends to all simple $f, g$. For general $f, g \in L^2(\mu)$, fix $\varepsilon > 0$ and choose simple $h, k$ with $\lVert f - h\rVert < \varepsilon$ and $\lVert g - k\rVert < \varepsilon$. Then
+
+$$
+c_n(f,g) = c_n(f-h,\, g) + c_n(h,\, g-k) + c_n(h,k),
+$$
+
+so, using the uniform bound on $c_n$,
+
+$$
+\lvert c_n(f,g)\rvert \leq 2\varepsilon \lVert g\rVert + 2\varepsilon\bigl(\lVert f\rVert + \varepsilon\bigr) + \lvert c_n(h,k)\rvert.
+$$
+
+Averaging over $n < N$ and letting $N \to \infty$, the last term contributes nothing, so
+
+$$
+\limsup_{N \to \infty} \frac{1}{N}\sum_{n=0}^{N-1} \lvert c_n(f,g)\rvert \leq 2\varepsilon\bigl(\lVert f\rVert + \lVert g\rVert + \varepsilon\bigr).
+$$
+
+As $\varepsilon$ was arbitrary, the limit is $0$.
+
+**(3) $\Leftrightarrow$ (4):** Put $a_n = \lvert c_n(f,f)\rvert$, so $0 \leq a_n \leq C := 2\lVert f\rVert^2$. If (3) holds then $a_n^2 \leq C a_n$ gives $\frac{1}{N}\sum a_n^2 \leq C \cdot \frac{1}{N}\sum a_n \to 0$. Conversely, Cauchy–Schwarz gives $\bigl(\frac{1}{N}\sum a_n\bigr)^2 \leq \frac{1}{N}\sum a_n^2$, so (4) implies (3).
+
+**(3) $\Rightarrow$ (2):** We use the following standard fact.
+
+> **Lemma (Koopman–von Neumann).** Let $(a_n)$ be a bounded sequence of nonnegative reals. Then $\frac{1}{N}\sum_{n<N} a_n \to 0$ if and only if there is a set $J \subseteq \mathbb{N}$ of density $1$ with $a_n \to 0$ as $n \to \infty$ along $J$.
+
+*Proof of the lemma.* If such a $J$ exists, then given $\varepsilon > 0$ we have $a_n < \varepsilon$ for large $n \in J$, while the complement contributes at most $C$ times its density, which tends to $0$; so the averages are eventually below $2\varepsilon$. Conversely, let $J_k = \\{n : a_n < 1/k\\}$. From $\frac{1}{N}\sum a_n \geq \frac{1}{k}\cdot\frac{\lvert [0,N) \setminus J_k\rvert}{N}$ we see each $\mathbb{N} \setminus J_k$ has density $0$; choose $N_1 < N_2 < \cdots$ so that this density stays below $1/k$ beyond $N_k$, and set $J = \bigcup_k \bigl(J_k \cap [N_k, N_{k+1})\bigr)$. Then $J$ has density $1$ and $a_n \to 0$ along $J$. $\square$
+
+Now let $f, g \in L^2(\mu)$, and assume without loss of generality that $\langle f,1\rangle = \langle g,1\rangle = 0$, so that $c_n(f,g) = \langle U^n f, g\rangle$. Apply (3) together with the lemma to each of $f$, $g$, $f+g$ and $f + ig$, and let $J$ be the intersection of the four resulting density-$1$ sets; a finite intersection of density-$1$ sets again has density $1$. Along $J$, all four of $\langle U^n f, f\rangle$, $\langle U^n g, g\rangle$, $\langle U^n(f+g), f+g\rangle$ and $\langle U^n(f+ig), f+ig\rangle$ tend to $0$. Expanding the third,
+
+$$
+\langle U^n(f+g), f+g \rangle = \langle U^n f, f\rangle + \langle U^n f, g\rangle + \langle U^n g, f\rangle + \langle U^n g, g\rangle,
+$$
+
+so $\langle U^n f, g\rangle + \langle U^n g, f\rangle \to 0$ along $J$. Expanding the fourth, and using $\langle x, iy\rangle = -i\langle x,y\rangle$ and $\langle ix, y\rangle = i \langle x,y\rangle$,
+
+$$
+\langle U^n(f+ig), f+ig \rangle = \langle U^n f, f\rangle - i\langle U^n f, g\rangle + i\langle U^n g, f\rangle + \langle U^n g, g\rangle,
+$$
+
+so $\langle U^n f, g\rangle - \langle U^n g, f\rangle \to 0$ along $J$. Adding the two gives $\langle U^n f, g\rangle \to 0$ along $J$, and the lemma applied in the other direction turns this back into
+
+$$
+\lim_{N \to \infty}\frac{1}{N}\sum_{n=0}^{N-1} \lvert \langle U^n f, g\rangle\rvert = 0,
+$$
+
+which is (2). Together with (2) $\Rightarrow$ (1) this closes the cycle. $\blacksquare$
 
 Weak-mixing, in particular, lends itself to a characterization in terms of the eigenvalues and eigenfunctions of the Koopman operator.
 
@@ -599,6 +653,11 @@ $$
 
 where we used the dominated convergence theorem in the last line to exchange the limit and the integral. $\blacksquare$
 
+{% comment %}
+HIDDEN 2026-07-28. This was section 5. To restore: un-comment, then
+renumber the visible "5. Advanced Results and Applications" back to 6,
+its subsections to 6.1-6.3, and its labels to 6.1, 6.2, 6.4-6.8.
+
 ## 5. The Isomorphism Problem
 
 First, we present a few different notions of equivalence of two measure-preserving dynamical systems. In this section, we will be fairly explicit about the $\sigma$-algebras associated to each measure.
@@ -639,14 +698,15 @@ We can write $\sigma(A) = \sigma_p(A) \cup \sigma_c(A) \cup \sigma_r(A)$ (disjoi
 The elements of the point spectrum are known as eigenvalues, and their associated vectors in the nullspace are known as eigenvectors or eigenfunctions. Note that for operators on a finite-dimensional Hilbert space, the entire spectrum is the point spectrum.
 
 For unitary operators, the residual spectrum is empty.
+{% endcomment %}
 
-## 6. Advanced Results and Applications
+## 5. Advanced Results and Applications
 
-### 6.1 Continuous-time Dynamical Systems
+### 5.1 Continuous-time Dynamical Systems
 
 These notes are largely dedicated to studying discrete-time dynamical systems. It is possible to study the action of continuous-time dynamical systems, or even dynamical systems associated to the action of more general semigroups. To do this, we present a new definition of dynamical systems that highlights their connection to group actions.
 
-**Definition 6.1.** A dynamical system is a triple $(X, G, \Phi)$ comprising a state space $X$, a semigroup $G$, and a map $\Phi: G \times X \to X$ which satisfies $\Phi(t+s, x) = \Phi(t, \Phi(s, x))$, which is known as the cocycle condition. Often, we write $\Phi(t, \cdot) = \Phi^t(x)$, in which case this notation simplifies to $\Phi^{t+s}(x) = \Phi^t \circ \Phi^s(x)$.
+**Definition 5.1.** A dynamical system is a triple $(X, G, \Phi)$ comprising a state space $X$, a semigroup $G$, and a map $\Phi: G \times X \to X$ which satisfies $\Phi(t+s, x) = \Phi(t, \Phi(s, x))$, which is known as the cocycle condition. Often, we write $\Phi(t, \cdot) = \Phi^t(x)$, in which case this notation simplifies to $\Phi^{t+s}(x) = \Phi^t \circ \Phi^s(x)$.
 
 Note that in the case that $X$ is a measure space and $G$ is $\mathbb{N}$, we recover the case of discrete-time measurable dynamical systems. We can also use $G = \mathbb{R}$ to analyze the case of continuous-time dynamics. This perspective is quite flexible, and choosing $G$ to be a group other than $\mathbb{N}$, $\mathbb{Z}$, or $\mathbb{R}$ can often result in very interesting mathematics that I do not understand very well.
 
@@ -658,18 +718,23 @@ $$
 
 This cocycle condition should be read as 'evolving a random dynamical system for time $t+s$' should be the same as 'evolve a system for time $s$, followed by evolving it for time $t$ starting the noise at $s$'. This is a mouthful, so let's look at a simple example. 
 
-**Example 6.2 (Random rotations on a circle).** We work in discrete time. We fix an angle $\alpha$, and at each time, we will flip a fair coin, and rotate clockwise or anticlockwise according to it. 
+**Example 5.2 (Random rotations on a circle).** We work in discrete time. We fix an angle $\alpha$, and at each time, we will flip a fair coin, and rotate clockwise or anticlockwise according to it. 
 
 In this example, since time is discrete, we fix our semigroup to be $G= \mathbb{N}$. Our state space $X=S^1$, which we write multiplicatively with the usual Haar measure and $\sigma$-algebra. Our noise space is our sequence of flips: the space is $\Omega = \\{0,1\\}^\mathbb{N}$, with the cylindrical Bernoulli measure we defined earlier. The noise evolution map $\theta$ is just given by the left-shift, and the dynamics are given by (for one time step), $\Phi(\omega, z) = \Phi(\theta(\omega), \exp(i(-1)^{\omega_0} \alpha) \cdot z)$. We can get the action at time $t$ by iterating this using the cocycle condition. 
 
 
+{% comment %}
+HIDDEN 2026-07-28. This was Theorem 6.3, between Example 6.2 and the
+Benford theorem. Restoring it shifts the labels after it down by one.
+
 **Theorem 6.3.** All compact topological dynamical systems have an ergodic, invariant Borel probability measure.
 
 The proof uses techniques from $C^*$-algebras and an application of the Markov--Kakutani fixed-point theorem.
+{% endcomment %}
 
-### 6.2 Fun Applications
+### 5.2 Fun Applications
 
-**Theorem 6.4 (Benford's Law).** Benford's law is the observation that the distribution of first digits of numbers found in data, especially financial data, empirically follows the distribution below, with digit $d \in \\{1, \ldots, 9\\}$ occurring with probability $\log_{10}(1 + 1/d)$.
+**Theorem 5.3 (Benford's Law).** Benford's law is the observation that the distribution of first digits of numbers found in data, especially financial data, empirically follows the distribution below, with digit $d \in \\{1, \ldots, 9\\}$ occurring with probability $\log_{10}(1 + 1/d)$.
 
 <figure>
   <img src="/images/fig_benford.png" alt="The Benford distribution over leading digits: digit one appears about thirty per cent of the time, digit nine under five per cent.">
@@ -680,18 +745,18 @@ While this observation is largely empirical, it is mostly observed in datasets t
 
 The model of explaining Benford's law assumes that a large amount of data in the real world arises due to a system of the form $a^r$, for some real number $r$. For example, this is a great model of prices under an inflation rate of $r$. Then, the first digit of the number $a^r$ is determined entirely by the value of the fractional part of $\log_{10}(a^r)$. If this fractional part lies in $[0, \log_{10}(2))$, the first digit is 1. If it is in $[\log_{10}(2), \log_{10}(3))$, the first digit is 2, and so on. However, note that the 'dynamical system' here is exactly that of $x \mapsto x + r \alpha \text{ mod 1}$, where $\alpha = \log_{10}a$, which is an irrational number. Thus, we see that by the Birkhoff ergodic theorem, the time spent in each interval is proportional to the measure of the interval, which is simply its length. We can compute these lengths, and they match up perfectly with Benford's law's predictions: the frequency of digit $d \in \\{1, \ldots, 9\\}$ is precisely $\log_{10}(1 + 1/d)$.
 
-**Example 6.5.** The **Gilbert--Shannon--Reeds model** of card shuffling uses ergodic theory to analyze riffle shuffles.
+**Example 5.4.** The **Gilbert--Shannon--Reeds model** of card shuffling uses ergodic theory to analyze riffle shuffles.
 
 <figure>
   <img src="/images/fig_riffle.png" alt="One step of the Gilbert-Shannon-Reeds riffle shuffle: the deck is cut, then cards are dropped from either half.">
   <figcaption>One step of the Gilbert&ndash;Shannon&ndash;Reeds riffle shuffle: cut the deck at a $\mathrm{Binomial}(n, 1/2)$ position, then drop cards from the left or right half with probability proportional to the current size of each half.</figcaption>
 </figure>
 
-### 6.3 Number Theory
+### 5.3 Number Theory
 
 We can also use ergodic theory to study number theory. The key definition that allows us to make this connection is as follows:
 
-**Definition 6.6.** The upper density of a subset $S$ of the natural numbers $\mathbb{N}$ is defined as
+**Definition 5.5.** The upper density of a subset $S$ of the natural numbers $\mathbb{N}$ is defined as
 
 $$
 d(S) = \limsup_{n \to \infty} \frac{\#\{s \in S : s \leq n\}}{n}.
@@ -699,13 +764,13 @@ $$
 
 This upper density behaves "almost" like a measure, and a number of the proofs given for the measure-theoretic dynamics can be repeated for analogs with the upper density. The dynamics are then mostly given by translations of the natural numbers by a fixed difference $d$, to study arithmetic progressions. This allowed Furstenberg to present an ergodic-theoretic proof of Szemerédi's theorem:
 
-**Theorem 6.7 (Szemerédi's Theorem).** Every set of integers $A$ with positive upper density contains a $k$-term arithmetic progression for every $k$.
+**Theorem 5.6 (Szemerédi's Theorem).** Every set of integers $A$ with positive upper density contains a $k$-term arithmetic progression for every $k$.
 
 The ergodic-theoretic proof is given by effectively proving the Poincaré recurrence theorem for the "measure" given by an upper density, and for the dynamics given by $+d$, for some integer $d > 0$. Containing a $k$-term arithmetic progression is thus equivalent to the set having a $k$-recurrent subset.
 
 Even though the prime numbers have $0$ upper density by the Prime Number Theorem, Green--Tao were able to extend these methods to show that the prime numbers contain arbitrarily long arithmetic progressions.
 
-**Theorem 6.8.** Almost all invertible measure-preserving transformations are weak-mixing. More formally, for a given probability space $(X, \mathcal{X}, \mu)$, we can form the space $\mathrm{Aut}(X, \mu)$ of all measure-preserving transformations, and give it a weak topology. In this topology, the weak-mixing transformations form a dense $G_\delta$ set (a residual set).
+**Theorem 5.7.** Almost all invertible measure-preserving transformations are weak-mixing. More formally, for a given probability space $(X, \mathcal{X}, \mu)$, we can form the space $\mathrm{Aut}(X, \mu)$ of all measure-preserving transformations, and give it a weak topology. In this topology, the weak-mixing transformations form a dense $G_\delta$ set (a residual set).
 
 The end of the last section also motivates a natural next area of study. Since spectral invariants are too weak to distinguish different systems with continuous spectrum from each other, we must find a stronger notion of invariance. Kolmogorov and Sinai did this by creating the notion of **entropy** of a dynamical system, which has become an active area of research. Entropy can be defined in both the topological and the measure-theoretic setting, and discussing it is beyond the scope of these notes. The motivated reader is referred to [2].
 
