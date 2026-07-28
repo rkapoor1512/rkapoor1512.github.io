@@ -9,15 +9,16 @@ tags:
   - mechanism-design
 ---
 
-In Winter 2026, I took an excellent class on differential privacy taught by Dr. Phyllis Ju. As a part of that course, I presented on two papers. The first was on the permute-and-flip mechanism for differentially private selection, as introduced by McKenna and Sheldon [1]. The second was on this methods' equivalence with Report Noisy Max under exponential noise, following Ding, Durfee, Kifer, Rogers, and Zhang [2]. I hope to, at some later point, add a preamble that provides a gentler introduction to differential privacy in general. As of now, these notes assume a bit of background knowledge in the field of differential privacy, and the standard terminology in the field. 
+In Winter 2026, I took an excellent class on differential privacy taught by Dr. Phyllis Ju. As part of that course, I presented on two papers. The first was on the permute-and-flip mechanism for differentially private selection, as introduced by McKenna and Sheldon [1]. The second was on this method's equivalence with Report Noisy Max under exponential noise, following Ding, Durfee, Kifer, Rogers, and Zhang [2]. I hope to, at some later point, add a preamble that provides a gentler introduction to differential privacy in general. As of now, these notes assume a bit of background knowledge in the field of differential privacy, and the standard terminology in the field. 
 
-Given a database $D$ and a finite set of candidate outputs, each of which comes with a quality score, we would like to release the "best" output — the one with the highest score — while preserving the privacy of individuals in $D$. This is the **differentially private selection** problem. The classical solution is the **exponential mechanism**, which samples output $r$ with probability proportional to $\exp(\varepsilon\, q(D, r) / (2\Delta))$. The permute-and-flip mechanism, introduced in 2020, does at least as well as the exponential mechanism on every input, and strictly better on most.
+Given a database $D$ and a finite set of candidate outputs, each of which comes with a quality score, we would like to release the "best" output — the one with the highest score — while preserving the privacy of individuals in $D$. This is the **differentially private selection** problem. The classical solution is the **exponential mechanism**, which samples output $r$ with probability proportional to $\exp(\varepsilon\, q(D, r) / (2\Delta))$. The permute-and-flip mechanism, introduced in 2020, does at least as well as the exponential mechanism on every input, and better on average.
 
 These notes:
 
 1. Set up the private selection problem and the notion of a **regular mechanism**.
-2. Present permute-and-flip and prove its optimality among regular mechanisms.
-3. Show its equivalence to **Report Noisy Max** with exponential noise, via the memoryless property of the exponential distribution.
+2. Relate it to the **exponential mechanism**, and to the link between entropy and privacy.
+3. Present permute-and-flip and prove its optimality among regular mechanisms.
+4. Show its equivalence to **Report Noisy Max** with exponential noise, via the memoryless property of the exponential distribution.
 
 ## 1. Setup and Notation
 
@@ -37,7 +38,7 @@ $$
 D = \bigl(\lbrace 1 \rbrace,\; \lbrace 1,2 \rbrace,\; \lbrace 1,2,3 \rbrace,\; \lbrace 1,2,3,4,5 \rbrace\bigr).
 $$
 
-The set of possible prices (outputs) is $R = \lbrace1, 2, 3, 4, 5\\}$. A neighboring database $D'$ differs from $D$ in exactly one person's response, e.g. replacing person 4's entry:
+The set of possible prices (outputs) is $R = \\{1, 2, 3, 4, 5\\}$. A neighboring database $D'$ differs from $D$ in exactly one person's response, e.g. replacing person 4's entry:
 
 $$
 D' = \bigl(\lbrace 1 \rbrace,\; \lbrace 1,2 \rbrace,\; \lbrace 1,2,3 \rbrace,\; \lbrace 1,2,3 \rbrace\bigr).
@@ -66,6 +67,8 @@ q_2(D, 1) = 4, \quad q_2(D, 2) = 6, \quad q_2(D, 3) = 6, \quad q_2(D, 4) = 4, \q
 $$
 
 The sensitivity is $\Delta_2 = \max_r r \cdot 1 = 5$: at price $r$, changing one person's response can change the revenue by at most $r$, and the maximum price is $5$.
+
+Note that we do *not* assume $q$ is monotonic: adding an individual may decrease $q$. For the many score functions that are monotonic — counts and profit among them — the analysis below saves a factor of $2$, and every $2\Delta$ may be replaced by $\Delta$.
 
 ## 2. Regular Mechanisms
 
@@ -117,11 +120,39 @@ The mechanism is remarkably simple. Given the score vector, we shuffle the outpu
 
 Note that the maximizer always has coin probability $1$, so the algorithm always terminates (worst case, at the last position in the shuffle).
 
-## 4. Optimality of Permute-and-Flip
+## 4. Connection to the Exponential Mechanism: Entropy and Privacy
+
+### 4.1 Softmax and the Boltzmann distribution
+
+Consider the **softmax** (or **Boltzmann**) distribution over a set of scores $x_1, \ldots, x_n$ at temperature $T$:
+
+$$
+p_i = \frac{\exp(x_i / T)}{\sum_{j=1}^n \exp(x_j / T)}.
+$$
+
+In physics this is the Boltzmann distribution; in machine learning it is the softmax. The exponential mechanism uses precisely this distribution with $T = 2\Delta / \varepsilon$.
+
+### 4.2 Entropy and privacy
+
+The **Shannon entropy** of the output distribution is
+
+$$
+H = -\sum_{i=1}^{n} p_i \ln p_i.
+$$
+
+The key intuition is that *privacy is roughly a matter of tuning the temperature $T$ so that the entropy $H$ is large enough.* When $T$ is large the distribution is close to uniform (high entropy, high privacy); when $T$ is small it concentrates on the maximum score (low entropy, low privacy).
+
+For $n = 5$, say:
+
+- $T \to 0$: the distribution tends to $(1, 0, 0, 0, 0)$, with entropy $H \approx 0$.
+- $T$ large: the distribution tends to $(0.2, 0.2, 0.2, 0.2, 0.2)$, with entropy $H \approx \ln 5$.
+- Intermediate $T$: something like $(0.6, 0.1, 0.1, 0.1, 0.1)$.
+
+## 5. Optimality of Permute-and-Flip
 
 We now argue that permute-and-flip is optimal among regular $\varepsilon$-differentially private mechanisms.
 
-### 4.1 Worst-case scores
+### 5.1 Worst-case scores
 
 The proof proceeds by analyzing the worst case for the quality scores. By monotonicity, the worst case occurs when the scores take the form
 
@@ -131,7 +162,7 @@ $$
 
 Indeed, $q' - q = 2\Delta\, e_r - \Delta\, \mathbf{1}$; by shift-invariance, adding the constant $\Delta$ to every coordinate does not change the distribution, so this case is identical to $q' = q + 2\Delta\, e_r$.
 
-### 4.2 Derivation via tight inequalities
+### 5.2 Derivation via tight inequalities
 
 The $\varepsilon$-differential privacy constraint requires, for score vectors $q, q' = q + 2\Delta\, e_r$ and all $r \in R$,
 
@@ -164,9 +195,9 @@ where $\vec{q}^{(r)}$ denotes $\vec{q}$ with its $r$-th entry raised to $q_\ast$
 
 In general, this optimization can be solved in $O(n \log n)$ time by sorting the scores. Permute-and-flip achieves this optimum in closed form.
 
-### 4.3 Optimality statement
+### 5.3 Optimality statement
 
-**Theorem 4.1.** The permute-and-flip mechanism is optimal among regular $\varepsilon$-differentially private mechanisms. That is, for any regular $\varepsilon$-differentially private mechanism $M'$,
+**Theorem 5.1.** The permute-and-flip mechanism is optimal among regular $\varepsilon$-differentially private mechanisms. That is, for any regular $\varepsilon$-differentially private mechanism $M'$,
 
 $$
 \mathbb{E}[q(D, M_{\mathrm{PF}}(D))] \geq \mathbb{E}[q(D, M'(D))].
@@ -174,15 +205,19 @@ $$
 
 Moreover, permute-and-flip **stochastically dominates** the exponential mechanism.
 
-**Theorem 4.2.** $M_{\mathrm{PF}}$ is never worse than $M_{\mathrm{EM}}$: for all $\vec{q} \in \mathbb{R}^n$ and all $t \geq 0$,
+**Theorem 5.2.** $M_{\mathrm{PF}}$ is never worse than $M_{\mathrm{EM}}$: for all $\vec{q} \in \mathbb{R}^n$ and all $t \geq 0$,
 
 $$
 \mathbb{E}[\mathcal{E}(M_{\mathrm{PF}}, \vec{q})] \leq \mathbb{E}[\mathcal{E}(M_{\mathrm{EM}}, \vec{q})], \qquad \Pr[\mathcal{E}(M_{\mathrm{PF}}, \vec{q}) \geq t] \leq \Pr[\mathcal{E}(M_{\mathrm{EM}}, \vec{q}) \geq t].
 $$
 
-## 5. Equivalence with Report Noisy Max
+### 5.4 Size of the improvement
 
-### 5.1 Report Noisy Max
+The exponential mechanism uses probability proportional to $\exp(\varepsilon\, q(r) / (2\Delta))$, while permute-and-flip effectively uses $\exp(\varepsilon\, q(r) / \Delta)$ in its selection probabilities. Concretely, the expected error of permute-and-flip is approximately $1.2\times$ smaller in the worst case (a gap that narrows as the dataset grows) and, numerically, approximately $2.2\times$ smaller on average.
+
+## 6. Equivalence with Report Noisy Max
+
+### 6.1 Report Noisy Max
 
 The **Report Noisy Max** mechanism adds i.i.d. noise to each quality score and returns the argmax.
 
@@ -197,7 +232,7 @@ The **Report Noisy Max** mechanism adds i.i.d. noise to each quality score and r
 
 Here $\mathrm{Exp}(\lambda)$ denotes the exponential distribution with rate $\lambda$.
 
-### 5.2 Why they are equivalent
+### 6.2 Why they are equivalent
 
 The equivalence between permute-and-flip and Report Noisy Max with exponential noise follows from the **memoryless property** of the exponential distribution. To make this precise, we introduce two intermediate algorithms.
 
@@ -219,9 +254,9 @@ Algorithm $A$ adds exponential noise to each score, collects the outcomes whose 
 
 Algorithm $B$ **truncates** each noisy score at $q_\ast$, then adds fresh exponential noise $z_i$ and returns the argmax among the elements that reached the threshold.
 
-**Theorem 5.1.** Permute-and-flip and Report Noisy Max with exponential noise produce identical output distributions.
+**Theorem 6.1.** Permute-and-flip and Report Noisy Max with exponential noise produce identical output distributions.
 
-*Sketch.* We chain four equivalences.
+*Sketch.* We chain three equivalences.
 
 *(i) Permute-and-flip $\Leftrightarrow$ Algorithm $A$.* In Algorithm $A$, the probability that outcome $i$ enters $S$ (i.e. that $v_i \geq q_\ast$) equals $\exp(\varepsilon(q(D, \omega_i) - q_\ast) / (2\Delta))$, which is exactly the coin-flip probability in permute-and-flip. To see this, recall that for $X \sim \mathrm{Exp}(\lambda)$, $\Pr(X > x) = e^{-\lambda x}$. Setting $\lambda = \varepsilon/(2\Delta)$ and $x = q_\ast - q_r$ recovers the flip probability. Returning a uniformly random element of $S$ is equivalent to shuffling and returning the first element that lands in $S$.
 
@@ -235,9 +270,9 @@ $$
 
 Consequently the "chop and add fresh noise" procedure produces the same distribution as the original noise above the threshold. $\square$
 
-## 6. Summary
+## 7. Summary
 
-The permute-and-flip mechanism is an optimal regular mechanism for $\varepsilon$-differentially private selection. It achieves a factor-of-two improvement in the exponent of the privacy-utility tradeoff compared to the classical exponential mechanism, and stochastically dominates it. Moreover, it is equivalent — as a randomized algorithm — to Report Noisy Max with exponential noise, via the memoryless property of the exponential distribution.
+The permute-and-flip mechanism is an optimal regular mechanism for $\varepsilon$-differentially private selection. It stochastically dominates the classical exponential mechanism — never worse on any input, roughly $1.2\times$ better in the worst case and $2.2\times$ better on average. Moreover, it is equivalent — as a randomized algorithm — to Report Noisy Max with exponential noise, via the memoryless property of the exponential distribution.
 
 ## References
 

@@ -10,7 +10,7 @@ tags:
   - functional-analysis
 ---
 
-*These are a set of study notes on the mathematics of kernels. They are largely based on Schölkopf and Smola's **Learning with Kernels** [1]. They study the theory of reproducing kernel Hilbert spaces, and kernelized algorithms for machine learning, and connect these to kernel integral operators and their regularization properties.*
+*These are a set of study notes on the mathematics of kernels. They are largely based on Schölkopf and Smola's *Learning with Kernels* [1]. They study the theory of reproducing kernel Hilbert spaces, and kernelized algorithms for machine learning, and connect these to kernel integral operators and their regularization properties.*
 
 ## 1. Support Vector Machines
 
@@ -18,7 +18,10 @@ tags:
 
 The simplest learning problem we can start with is classifying datapoints into two buckets. Here, we imagine our data lives in $\mathcal{X}$ (drawn as $\mathbb{R}^2$), and the 'true' categories live in $\mathcal{Y} = \\{+1,-1\\}$, drawn as blue and red dots respectively.
 
-![Linearly separable two-class data, together with the maximum-margin separating hyperplane and its margins (dashed).](/images/fig_svm_linear.png)
+<figure>
+  <img src="/images/fig_svm_linear.png" alt="Two linearly separable classes with a maximum-margin separating line and its margins.">
+  <figcaption>Linearly separable two-class data, together with the maximum-margin separating hyperplane and its margins (dashed).</figcaption>
+</figure>
 
 This problem is fairly easy to solve. A hyperplane is specified by
 
@@ -51,13 +54,19 @@ Choosing $\lambda = \infty$ recovers the hard-classification problem.
 
 A much harder problem to solve, however, is the following.
 
-![Concentric-circle data. The two classes are separated by a circle, not a line, so no hyperplane in the original coordinates can separate them.](/images/fig_svm_circles.png)
+<figure>
+  <img src="/images/fig_svm_circles.png" alt="Two classes arranged as concentric rings, which no straight line can separate.">
+  <figcaption>Concentric-circle data. The two classes are separated by a circle, not a line, so no hyperplane in the original coordinates can separate them.</figcaption>
+</figure>
 
 To our eyes, this problem is simple: we can quickly see that the classifying curve is a circle between the two classes. However, this is where the nonlinearity becomes a problem: our technique only allows us to learn a hyperplane.
 
 The trick is to define a feature map $\varphi(x_1,x_2) = (x_1, x_2, x_1^2 + x_2^2)$, and lift to a higher-dimensional space, where the classification problem is completely linear.
 
-![The lift $\varphi(x_1,x_2) = (x_1, x_2, x_1^2 + x_2^2)$. In the third coordinate the two classes sit at different heights, so a flat plane now separates them.](/images/fig_svm_lift3d.png)
+<figure>
+  <img src="/images/fig_svm_lift3d.png" alt="The concentric-ring data lifted into three dimensions, where a flat plane separates the two classes.">
+  <figcaption>The lift $\varphi(x_1,x_2) = (x_1, x_2, x_1^2 + x_2^2)$. In the third coordinate the two classes sit at different heights, so a flat plane now separates them.</figcaption>
+</figure>
 
 In this new picture, the data is again linearly separable, with the separating hyperplane now being $2$-dimensional instead of $1$-dimensional.
 
@@ -186,7 +195,7 @@ There are a number of common loss functions. The first three are used for **clas
 - **Binary (0–1) loss.** This simply counts misclassifications:
 
 $$
-c(x,y,f(x)) = \mathbf{1}[\,y f(x) < 0\,] = \tfrac{1}{2}\,\lvert\,\operatorname{sgn} f(x) - y\,\rvert.
+c(x,y,f(x)) = \mathbf{1}[\,y f(x) < 0\,] = \tfrac{1}{2}\,\lvert\,\operatorname{sgn} f(x) - y\,\rvert \quad (f(x) \neq 0).
 $$
 
   It is the loss we truly care about, but it is non-convex and discontinuous, so in practice we minimize a convex **surrogate** that upper-bounds it. The next two are the most common such surrogates.
@@ -205,14 +214,20 @@ $$
 c(x,y,f(x)) = \log\!\left(1 + e^{-y f(x)}\right).
 $$
 
-![Classification losses as a function of the margin $yf(x)$. The convex hinge and logistic losses both upper-bound the $0/1$ loss.](/images/fig_loss_classification.png)
+<figure>
+  <img src="/images/fig_loss_classification.png" alt="Zero-one, hinge and logistic losses plotted against the margin.">
+  <figcaption>Classification losses as a function of the margin $yf(x)$. The convex hinge and logistic losses both upper-bound the $0/1$ loss.</figcaption>
+</figure>
 
 The remaining two are used for **regression**, where $Y = \mathbb{R}$, and depend on the residual $f(x) - y$.
 
 - **Squared (mean-square) loss.** $c(x,y,f(x)) = (f(x)-y)^2$. Smooth and strongly convex, but sensitive to outliers.
 - **$L^1$ loss.** $c(x,y,f(x)) = \lvert f(x)-y\rvert$. More robust to outliers, but not differentiable at $0$.
 
-![Regression losses as a function of the residual $f(x) - y$.](/images/fig_loss_regression.png)
+<figure>
+  <img src="/images/fig_loss_regression.png" alt="Squared and absolute-value losses plotted against the residual.">
+  <figcaption>Regression losses as a function of the residual $f(x) - y$.</figcaption>
+</figure>
 
 Each of these satisfies the axiom $c(x,y,y) = 0$: a perfect prediction incurs no loss.
 
@@ -244,6 +259,10 @@ $$
 
 Here $\lambda$ is the **regularization parameter**: small $\lambda$ regularizes weakly, large $\lambda$ regularizes strongly. We now leave statistical learning theory aside and focus on the mathematical problem of actually solving this.
 
+## 6. The Representer Theorem
+
+Reproducing kernel Hilbert spaces are in general infinite-dimensional, and optimizing over an infinite-dimensional space sounds hard. However — and this is the heart of the kernel trick — the representer theorem tells us that it is tractable: the best fit to the data $\\{x_i\\}$ is a ***finite*** linear combination of the feature vectors $K(x_i, \cdot)$. We therefore only need to learn finitely many coefficients.
+
 **Theorem 6.1 (Representer Theorem).** Given a training sample $(x_1, y_1), \ldots, (x_n, y_n) \in X \times \mathbb{R}$, a loss function $L : X \times \mathbb{R} \times \mathbb{R} \to \mathbb{R}$, and a strictly increasing $\Omega$, the minimizer in $H$ of
 
 $$
@@ -259,7 +278,7 @@ $$
 Proof. Let 
 
 $$
-H_n = \text{span}\\{K(x_i, \cdot)\\}_{i=1}^n
+H_n = \text{span}\{K(x_i, \cdot)\}_{i=1}^n
 $$
 
 Since this is finite-dimensional it is closed, so the projection onto it and its orthogonal complement are well-defined. Write $f = f_\parallel + f_\perp$ with $f_\parallel \in H_n$ and $f_\perp \perp H_n$. Then
@@ -276,48 +295,99 @@ $$
 
 But $\lVert f\rVert_H^2 = \lVert f_\parallel\rVert_H^2 + \lVert f_\perp\rVert_H^2 \geq \lVert f_\parallel\rVert_H^2$. Thus the first term of the risk depends only on $f_\parallel$, while the regularization term is only increased by a nonzero $f_\perp$. Hence $\lVert f_\perp\rVert = 0$ for the optimal $f$, which means $f \in \text{span}\\{K(x_i, \cdot)\\}_i$. $\square$
 
-{% comment %} 
-
-## 7. Kernel Mean Embedding
-
-Until now, we have worked on lifting single data points into a reproducing kernel Hilbert space. We can work on one higher layer of abstraction, and also embed entire probability distributions into RKHSs. Here, we will assume $M$ is compact and the kernel function $k$ is continuous. By $P(M)$ we denote the space of finite Borel measures on $M$. Then, The kernel mean embedding map is a map induced by a kernel function $k$, given by $E: P(M) \to \mathcal{H}$ given by 
-
-$$
-E(\mu)(x) = \int_M k(x,y) d\mu(y)
-$$
-
-We say that a kernel map $k(x,y)$ is a \textbf{characteristic} kernel function if the induced map $E$ is injective on probability distributions. In practice, we will assume a stronger property on our kernels: that they are in fact universal.
-
-A kernel function $k: M \times M \to \R$ is said to be universal if the reproducing kernel Hilbert space of functions $\mathcal{H}$ is dense in $C_b(M)$, ie, we have that for any $f \in C_b(M)$, there exists $h \in \mathcal{H}$ such that $\lVerth-f\rVert_\infty < \varepsilon$.
-
-This embedding induces a psuedometric on the space of probability measures: given two densities $\mu_1, \mu_2$, we can write a metric $d: P(M) \times P(M) \to \R_+$ given by $d(\mu_1, \mu_2) = \norm{E(\mu_1)-E(\mu_2)}_\mathcal{H}$. This is known as the maximum mean discrepancy. To see its relationship to other metrics on the space of probability distributions, we can define the notion of a integral probability metric. 
-
-
-
-
-
 ## 7. Regularization Operators
 
 Here we present a third perspective on kernel methods: viewing them as a regularization operator in some space. This ultimately connects, via Bochner's theorem, to a picture of translation-invariant kernels as regularizers in the frequency domain.
 
 A **regularization operator** $\Upsilon$ from a space of functions $\mathcal{F}$ into a Hilbert space $\mathcal{H}$ is an operator such that the regularization term is $\Omega(f) = \langle \Upsilon f, \Upsilon f \rangle_{\mathcal{H}}$. Without loss of generality we may assume $\Upsilon$ is positive: if it is not, we replace it by $\Upsilon' = (\Upsilon^\ast \Upsilon)^{1/2}$, which has the same property and exists as the positive square root of a positive operator.
 
-## 8. Random Fourier Features
+## 8. Kernel Mean Embedding
 
+Until now, we have worked on lifting single data points into a reproducing kernel Hilbert space. We can work one level higher, and embed entire probability distributions into RKHSs. Here we assume $M$ is compact and the kernel $k$ is continuous. By $P(M)$ we denote the space of finite Borel measures on $M$. The **kernel mean embedding** induced by a kernel $k$ is the map $E : P(M) \to \mathcal{H}$ given by
 
+$$
+E(\mu)(x) = \int_M k(x,y)\, d\mu(y).
+$$
 
-In this section, we restrict to **translation-invariant** kernels.
+We say that a kernel $k(x,y)$ is **characteristic** if the induced map $E$ is injective on probability distributions. In practice we assume a stronger property on our kernels: that they are in fact universal.
 
-**Definition 8.1.** A translation-invariant kernel is a kernel $k(x,y)$ that depends only on $x - y$. With a slight abuse of notation, we write $k(x,y) = k(x-y)$.
+**Definition 8.1.** A kernel $k : M \times M \to \mathbb{R}$ is **universal** if the reproducing kernel Hilbert space $\mathcal{H}$ is dense in $C_b(M)$: for every $f \in C_b(M)$ and every $\varepsilon > 0$ there exists $h \in \mathcal{H}$ with $\lVert h - f\rVert_\infty < \varepsilon$.
 
-Such kernels admit an abstract characterization via **Bochner's theorem**, which in turn gives a way to write randomized kernel algorithms (random Fourier features).
+This embedding induces a pseudometric on the space of probability measures: given $\mu_1, \mu_2$, set
 
----
-{% endcomment %}
+$$
+d(\mu_1, \mu_2) = \lVert E(\mu_1) - E(\mu_2)\rVert_{\mathcal{H}}.
+$$
 
+This is known as the **maximum mean discrepancy** (MMD). To see its relationship to other metrics on the space of probability distributions, we define the notion of an integral probability metric.
 
-*These notes are a work in progress. The proof of Mercer's theorem, the kernel mean embedding, and the random Fourier features / Bochner's theorem material are still being written and will be added.*
+**Definition 8.2.** Given two probability measures $\mu_1$ and $\mu_2$ on a measurable space $\mathcal{X}$, an **integral probability metric** (IPM) is
+
+$$
+\gamma[\mathcal{F}, \mu_1, \mu_2] = \sup_{f \in \mathcal{F}} \left\{ \int f(\mathbf{x})\, d\mu_1(\mathbf{x}) - \int f(\mathbf{y})\, d\mu_2(\mathbf{y}) \right\},
+$$
+
+where $\mathcal{F}$ is a space of real-valued bounded measurable functions on $\mathcal{X}$.
+
+The function class $\mathcal{F}$ fully characterizes the IPM $\gamma[\mathcal{F}, \mu_1, \mu_2]$, and there is an obvious trade-off in choosing it. On one hand, the class must be rich enough that $\gamma[\mathcal{F}, \mu_1, \mu_2]$ vanishes if and only if $\mu_1 = \mu_2$. On the other, the larger the class, the harder $\gamma[\mathcal{F}, \mu_1, \mu_2]$ is to estimate. For example, taking $\mathcal{F}$ to be all bounded continuous functions on $\mathcal{X}$ does give a metric on probability distributions.
+
+Since $C_b(\mathcal{X})$ is difficult to work with in practice, we use more restrictive classes:
+
+- Taking $\mathcal{F}_{\mathrm{TV}} = \\{ f : \lVert f\rVert_\infty \leq 1 \\}$, where $\lVert f\rVert_\infty = \sup_{\mathbf{x} \in \mathcal{X}} \lvert f(\mathbf{x})\rvert$, gives $\gamma[\mathcal{F}_{\mathrm{TV}}, \mu_1, \mu_2] = \lVert \mu_1 - \mu_2\rVert_1$, the **total variation distance**.
+- Writing $\lVert f\rVert_L := \sup\\{ \lvert f(\mathbf{x}) - f(\mathbf{y})\rvert / \rho(\mathbf{x}, \mathbf{y}) : \mathbf{x} \neq \mathbf{y} \in \mathcal{X} \\}$ for the Lipschitz semi-norm with respect to a metric $\rho$ on $\mathcal{X}$, and taking $\mathcal{F}_{\mathrm{W}} = \\{ f : \lVert f\rVert_L \leq 1 \\}$, yields the **Wasserstein $W_1$ distance** (sometimes called the earthmover distance).
+
+## 9. Random Fourier Features
+
+In Section 6 we saw that optimizing over an infinite-dimensional RKHS $\mathcal{H}$ reduces to learning a finite number of coefficients $\\{\alpha_i\\}$, one per data point:
+
+$$
+f_*(x) = \sum_{i=1}^N \alpha_i k(x_i, x).
+$$
+
+Mathematicians tend to be quite happy with reducing a possibly infinite-dimensional problem to a finite one. However, in modern machine learning datasets are enormous, and it is not practical to learn as many coefficients as you have data points. So instead of evaluating the kernel at every data point, we use a random approximation to $k(x_i, x)$ built from $D$ functions, indexed by $\omega_j$ and chosen independently of the data:
+
+$$
+k(x,x') \approx \sum_{j=1}^D z(x, \omega_j)\, z(\omega_j, x').
+$$
+
+Since a linear combination of a linear combination is just another linear combination, we can write
+
+$$
+f_* = \sum_{i=1}^D \beta_i\, z(x, \omega_i),
+$$
+
+reducing the problem to learning a relatively small number of coefficients. The question is how to build that approximation well. To do so, we restrict to translation-invariant kernels.
+
+**Definition 9.1.** A **translation-invariant** kernel is a kernel $k(x,y)$ that depends only on $x - y$. With a slight abuse of notation, we write $k(x,y) = k(x-y)$.
+
+Such kernels admit an abstract characterization via Bochner's theorem.
+
+**Theorem 9.2 (Bochner).** A (normalized) translation-invariant kernel $k(x-y)$ can be written as the Fourier transform of a finite Borel probability measure: there exists a measure $\Lambda(\omega)$ such that
+
+$$
+k(x-y) = \int e^{i \omega \cdot (x-y)}\, d\Lambda(\omega).
+$$
+
+This measure $\Lambda$ is called the **spectral measure**. It gives us a way to write randomized kernel algorithms: draw samples $\\{\omega_j\\}_{j=1}^D \sim d\Lambda$ and approximate the integral by a sum,
+
+$$
+k(x - y) \approx \frac{1}{D} \sum_{j=1}^D e^{i \omega_j \cdot (x-y)}.
+$$
+
+This relies on being able to compute and sample from the spectral measure. Luckily, most commonly used kernels have easily computed spectral measures. For example, the Gaussian kernel $k(x-y) = \exp\!\left(-\lVert x-y\rVert^2 / 2\sigma^2\right)$ on $\mathbb{R}^K$ has spectral measure
+
+$$
+d\Lambda(\omega) = \left(\frac{\sigma^2}{2\pi}\right)^{K/2} \exp\!\left(-\sigma^2\lVert \omega\rVert^2 / 2\right) d\omega,
+$$
+
+which is just another Gaussian, and very easy to sample from.
+
+We can further use Hoeffding's inequality to bound the approximation error, which decays like $O(1/\sqrt{D})$ in the number $D$ of random features. In practice we can do much better than this bound and get away with far fewer features: 'random features' form a perfectly good (random) basis by themselves, and can be used directly. The interested reader is referred to [2].
+
+It is also worth noting that this perspective can be used to understand neural networks rigorously. A neural network with a single hidden layer tends, in the infinite-width limit, to a kernel machine. That limit corresponds precisely to taking infinitely many random features, so a real-world finite-width single-layer network can be understood as a random Fourier features method. This is particularly interesting because ML theory lacks a rigorous understanding of real-world neural networks, and this is a useful toy model for them.
 
 ## References
 
 [1] B. Schölkopf and A. J. Smola, *Learning with Kernels: Support Vector Machines, Regularization, Optimization, and Beyond*, MIT Press, 2002.
+
+[2] A. Rahimi and B. Recht, "Random Features for Large-Scale Kernel Machines," *Advances in Neural Information Processing Systems*, 2007.
