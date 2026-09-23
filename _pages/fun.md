@@ -137,29 +137,28 @@ Day hike with my brother for Mt. Lincoln and Lafayette
 
 {% include gallery id="gallery_2026_08_16" caption="" %}
 
-## August 8, 2026
+## The Hancocks
 
-Hancock and South Hancock, with Jacob LD. 
+With Jacob LD. 
 {% include gallery id="gallery_2026_08_08" caption="" %}
 
-## July 4, 2026
+## The Osceolas
 
-The Osceolas
 {% include gallery id="gallery_2026_07_04" class="half" caption="" %}
 
-## June 9, 2026
+## Backpacking loop
 
-Backpacking trip with Jacob LD, for Hale, Zealand, Willey, Field and Tom. 
+Backpacking trip with Jacob LD, for Mt. Hale, Zealand, Willey, Field and Tom. 
 {% include gallery id="gallery_2026_06_09" caption="" %}
 
 {% include gallery id="gallery_2026_06_08" caption="" %}
 
-## May 31, 2026
+## Moosilauke
 
 Moosilauke with the Dartmouth Math Department 
 {% include gallery id="gallery_2026_05_31" caption="" %}
 
-## May 16, 2026
+## Cannon Mountain
 
 Cannon Mountain with my parents
 {% include gallery id="gallery_2026_05_16" caption="" %}
