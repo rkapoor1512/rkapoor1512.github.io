@@ -10,7 +10,9 @@ main:
      url: /assets/CV_Rohan__Last_updated_Aug2026_.pdf
    - title: "Blog"
      url: /blog
-#this code is highly sensitive to indentation bullshit      
+   - title: "Fun"
+     url: /fun/
+#this code is highly sensitive to indentation bullshit
 
 #  - title: "Portfolio"
 #   url: /portfolio/
