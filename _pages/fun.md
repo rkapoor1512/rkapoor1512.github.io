@@ -29,26 +29,18 @@ class: wide
 gallery_2026_09_19:
   - image_path: fun/hike-2026-09-19-10.jpg
     alt: "Two hikers on a rocky summit as the sun comes up"
-  - image_path: fun/hike-2026-09-19-11.jpg
-    alt: "Hikers standing on summit rocks in early morning light"
   - image_path: fun/hike-2026-09-19-12.jpg
     alt: "Selfie at a USFS trail sign on an open rocky ridge"
   - image_path: fun/hike-2026-09-19-2.jpg
     alt: "Cog railway train climbing an alpine slope"
-  - image_path: fun/hike-2026-09-19-3.jpg
-    alt: "Cog railway train on the track with distant ridgelines behind"
   - image_path: fun/hike-2026-09-19-4.jpg
     alt: "View across a ravine to a rocky ridge, early fall color below"
   - image_path: fun/hike-2026-09-19-5.jpg
     alt: "Alpine tarn with a stone hut beside it"
-  - image_path: fun/hike-2026-09-19-6.jpg
-    alt: "Hiker standing on a rocky outcrop in low evening light"
   - image_path: fun/hike-2026-09-19-7.jpg
     alt: "Hiker beside a cairn, forested ridges stretching to the horizon"
   - image_path: fun/hike-2026-09-19-8.jpg
     alt: "Hiker resting on open rock with mountains behind"
-  - image_path: fun/hike-2026-09-19-9.jpg
-    alt: "Hiker next to a summit cairn at golden hour"
   - image_path: fun/hike-2026-09-19-1.jpg
     alt: "Hiker on a wooded trail at night, lit by headlamp"
 
@@ -73,8 +65,6 @@ gallery_2026_08_08:
 gallery_2026_07_04:
   - image_path: fun/hike-2026-07-04-1.jpg
     alt: "Two hikers sitting on a wide granite ledge above a green valley"
-  - image_path: fun/hike-2026-07-04-2.jpg
-    alt: "Hikers at the edge of a cliff looking out over rolling mountains"
 
 gallery_2026_06_09:
   - image_path: fun/hike-2026-06-09-4.jpg
@@ -91,14 +81,8 @@ gallery_2026_06_09:
 gallery_2026_06_08:
   - image_path: fun/hike-2026-06-08-1.jpg
     alt: "Shallow river running between spruce banks"
-  - image_path: fun/hike-2026-06-08-2.jpg
-    alt: "River crossing with boulders in the current"
-  - image_path: fun/hike-2026-06-08-3.jpg
-    alt: "River looking upstream in evening light"
   - image_path: fun/hike-2026-06-08-4.jpg
     alt: "Pastel sunset reflected in a still pond"
-  - image_path: fun/hike-2026-06-08-5.jpg
-    alt: "Pond at sunset with rocks in the foreground"
 
 gallery_2026_05_31:
   - image_path: fun/hike-2026-05-31-1.jpg
@@ -111,6 +95,30 @@ gallery_2026_05_16:
     alt: "Two hikers on a granite ledge above a valley"
   - image_path: fun/hike-2026-05-16-2.jpg
     alt: "Hiker on a ledge with a highway winding through the valley below"
+
+gallery_2024_08:
+  - image_path: fun/kili-2024-08-1.jpg
+    alt: "Kilimanjaro at dawn with a lenticular cloud capping the summit, tents in the foreground"
+  - image_path: fun/kili-2024-08-2.jpg
+    alt: "Hikers walking a gravel trail toward Kilimanjaro's snowy flank"
+  - image_path: fun/kili-2024-08-3.jpg
+    alt: "Line of hikers on a rocky trail toward a craggy outcrop"
+  - image_path: fun/kili-2024-08-4.jpg
+    alt: "Four hikers jumping above a sea of clouds"
+  - image_path: fun/kili-2024-08-5.jpg
+    alt: "Group at the Uhuru Peak summit sign"
+  - image_path: fun/kili-2024-08-6.jpg
+    alt: "Three hikers resting beneath the summit signpost"
+  - image_path: fun/kili-2024-08-7.jpg
+    alt: "Sunrise over a sea of clouds with bare trees in the foreground"
+  - image_path: fun/kili-2024-08-8.jpg
+    alt: "Misty montane rainforest on the descent"
+
+gallery_2024_06_07:
+  - image_path: fun/bhutan-2024-06-07-1.jpg
+    alt: "Tiger's Nest monastery on a sheer cliff face, seen from afar"
+  - image_path: fun/bhutan-2024-06-07-2.jpg
+    alt: "Close view of Tiger's Nest monastery clinging to the cliff"
 ---
 
 This is a mostly random subset of pictures from various hikes I've been on in reverse-chronological order. I am currently 20/48 of the way through the NH48 challenge, which climbs all 48 of the 4k-footers in New Hampshire. I have also climbed Mt. Kilimanjaro, and Stok Kangri, both of which are above 19,000ft. 
@@ -137,7 +145,7 @@ Hancock and South Hancock, with Jacob LD.
 ## July 4, 2026
 
 The Osceolas
-{% include gallery id="gallery_2026_07_04" caption="" %}
+{% include gallery id="gallery_2026_07_04" class="half" caption="" %}
 
 ## June 9, 2026
 
@@ -155,3 +163,11 @@ Moosilauke with the Dartmouth Math Department
 
 Cannon Mountain with my parents
 {% include gallery id="gallery_2026_05_16" caption="" %}
+
+## Mt. Kilimanjaro, August 2024
+
+{% include gallery id="gallery_2024_08" caption="" %}
+
+## Paro Taktsang (Tiger's Nest), Bhutan, June 2024
+
+{% include gallery id="gallery_2024_06_07" caption="" %}
